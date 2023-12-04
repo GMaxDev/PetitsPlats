@@ -1,12 +1,19 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>Petits Plats 2.0</title>
   </head>
   <body>
+    <header class="flex flex-col items-center justify-center">
+      <div class="absolute top-0 left-0 flex items-end pt-12 pl-16" id="logo">
+        <img src="./assets/svg/Les petits plats.svg" alt="Texte les petits plats">
+        <img src="./assets/svg/dot.svg" alt="point">
+      </div>
+      <h2 id="tagline" class="w-13/24 text-amber-300">Cherchez parmi plus de 1500 recettes du quotidien, simples et délicieuses</h2>
+      <input class="w-4/6 h-16 pl-8" type="search" name="search" id="search" placeholder="Rechercher une recette, un ingrédient, ...">
+    </header>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
   </body>

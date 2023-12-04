@@ -2,16 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Anton';
+  src: url(/assets/font/Anton-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: url(/assets/font/Manrope-VariableFont_wght.ttf);
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Manrope',Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color: #1B1B1B;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3 {
+  font-family: 'Anton', Arial;
+}
+
+header {
+  height: 667px;
+  background:rgba(0, 0, 0, 0.3) url(./assets/img/header_wallpaper.jpg);
+}
+
+header #tagline {
+  font-size: 3rem;
+  /* text-5xl font-normal leading-10 */
 }

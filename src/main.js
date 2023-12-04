@@ -1,5 +1,4 @@
 import "../style.css";
-import { setupCounter } from "./counter.js";
 
 document.querySelector("#app").innerHTML = `
   <div class="bg-red-500 flex flex-col gap-4 max-w-xl m-auto hover:bg-blue-500">
@@ -13,4 +12,3 @@ document.querySelector("#app").innerHTML = `
   </div>
 `;
 
-setupCounter(document.querySelector("#counter"));
