@@ -3,16 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/dad50bc139.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Petits Plats 2.0</title>
   </head>
   <body>
     <header class="flex flex-col items-center justify-center">
       <div class="absolute top-0 left-0 flex items-end pt-12 pl-16" id="logo">
-        <img src="./assets/svg/Les petits plats.svg" alt="Texte les petits plats">
-        <img src="./assets/svg/dot.svg" alt="point">
+        <img
+          src="./assets/svg/Les petits plats.svg"
+          alt="Texte les petits plats"
+        />
+        <img src="./assets/svg/dot.svg" alt="point" />
       </div>
-      <h2 id="tagline" class="w-13/24 text-amber-300">Cherchez parmi plus de 1500 recettes du quotidien, simples et délicieuses</h2>
-      <input class="w-4/6 h-16 pl-8" type="search" name="search" id="search" placeholder="Rechercher une recette, un ingrédient, ...">
+      <h2 id="tagline" class="w-2/3 mx-auto text-center text-amber-300">
+        Cherchez parmi plus de 1500 recettes du quotidien, simples et
+        délicieuses
+      </h2>
+      <div class="flex items-center justify-center w-full mt-6 search_container">
+        <input
+          class="w-2/3 h-16 pl-8 rounded-lg"
+          type="search"
+          name="search"
+          id="search"
+          placeholder="Rechercher une recette, un ingrédient, ..."
+        />
+        <span class="relative inline-block p-2 right-14 bg-trueGray-900">
+          <i class="fas fa-search fa-2x"></i>
+        </span>
+      </div>
     </header>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
