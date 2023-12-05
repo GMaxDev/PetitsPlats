@@ -19,7 +19,7 @@
         <img src="./assets/svg/dot.svg" alt="point" />
       </div>
       <div
-        class="relative flex flex-col items-center justify-center w-3/6 mt-6 search_container"
+        class="relative flex flex-col items-center justify-center w-3/6 mt-6 searchContainer"
       >
         <h2 id="tagline" class="mx-auto text-center text-amber-300">
           Cherchez parmi plus de 1500 recettes du quotidien, simples et
@@ -32,34 +32,37 @@
           id="search"
           placeholder="Rechercher une recette, un ingrédient, ..."
         />
-        <span class="absolute inline-block p-2 right-1 bottom-1.5 bg-trueGray-900">
+        <span
+          class="absolute inline-block p-2 right-1 bottom-1.5 bg-trueGray-900"
+        >
           <i class="fas fa-search fa-2x"></i>
         </span>
       </div>
     </header>
     <main class="flex flex-col justify-between mx-24 my-6">
-      <div class="flex justify-between" id="filter_zone">
-        <div class="flex gap-16" id="filter_form">
-          <div id="ingredients_filter">
-            <button class="button_filter" id="ingredients" type="button">
+      <div class="flex justify-between mb-14" id="filterZone">
+        <div class="flex gap-16" id="filterForm">
+          <div id="ingredientsFilter">
+            <button class="buttonFilter" id="ingredients" type="button">
               Ingrédients <i class="fa-solid fa-chevron-up"></i>
             </button>
           </div>
-          <div id="devices_filter">
-            <button class="button_filter" id="devices" type="button">
+          <div id="devicesFilter">
+            <button class="buttonFilter" id="devices" type="button">
               Appareils <i class="fa-solid fa-chevron-up"></i>
             </button>
           </div>
-          <div id="ustensils_filter">
-            <button class="button_filter" id="ustensils" type="button">
+          <div id="ustensilsFilter">
+            <button class="buttonFilter" id="ustensils" type="button">
               Ustensiles <i class="fa-solid fa-chevron-up"></i>
             </button>
           </div>
         </div>
         <h3 class="text-xl">1500 recettes</h3>
       </div>
+      <div class="grid grid-cols-3 gap-x-12 gap-y-16" id="recipeCardZone"></div>
     </main>
     <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/pages/main.js"></script>
   </body>
 </html>
