@@ -9,7 +9,7 @@
     ></script>
     <title>Petits Plats 2.0</title>
   </head>
-  <body>
+  <body class="bg-gray-200">
     <header class="flex flex-col items-center justify-center">
       <div class="absolute top-0 left-0 flex items-end pt-12 pl-16" id="logo">
         <img
@@ -18,23 +18,47 @@
         />
         <img src="./assets/svg/dot.svg" alt="point" />
       </div>
-      <h2 id="tagline" class="w-2/3 mx-auto text-center text-amber-300">
-        Cherchez parmi plus de 1500 recettes du quotidien, simples et
-        délicieuses
-      </h2>
-      <div class="flex items-center justify-center w-full mt-6 search_container">
+      <div
+        class="relative flex flex-col items-center justify-center w-3/6 mt-6 search_container"
+      >
+        <h2 id="tagline" class="mx-auto text-center text-amber-300">
+          Cherchez parmi plus de 1500 recettes du quotidien, simples et
+          délicieuses
+        </h2>
         <input
-          class="w-2/3 h-16 pl-8 rounded-lg"
+          class="w-full h-16 pl-8 mt-5 rounded-lg"
           type="search"
           name="search"
           id="search"
           placeholder="Rechercher une recette, un ingrédient, ..."
         />
-        <span class="relative inline-block p-2 right-14 bg-trueGray-900">
+        <span class="absolute inline-block p-2 right-1 bottom-1.5 bg-trueGray-900">
           <i class="fas fa-search fa-2x"></i>
         </span>
       </div>
     </header>
+    <main class="flex flex-col justify-between mx-24 my-6">
+      <div class="flex justify-between" id="filter_zone">
+        <div class="flex gap-16" id="filter_form">
+          <div id="ingredients_filter">
+            <button class="button_filter" id="ingredients" type="button">
+              Ingrédients <i class="fa-solid fa-chevron-up"></i>
+            </button>
+          </div>
+          <div id="devices_filter">
+            <button class="button_filter" id="devices" type="button">
+              Appareils <i class="fa-solid fa-chevron-up"></i>
+            </button>
+          </div>
+          <div id="ustensils_filter">
+            <button class="button_filter" id="ustensils" type="button">
+              Ustensiles <i class="fa-solid fa-chevron-up"></i>
+            </button>
+          </div>
+        </div>
+        <h3 class="text-xl">1500 recettes</h3>
+      </div>
+    </main>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
   </body>

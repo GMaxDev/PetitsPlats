@@ -3,21 +3,21 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Anton';
+  font-family: "Anton";
   src: url(/assets/font/Anton-Regular.ttf);
 }
 
 @font-face {
-  font-family: 'Manrope';
+  font-family: "Manrope";
   src: url(/assets/font/Manrope-VariableFont_wght.ttf);
 }
 
 :root {
-  font-family: 'Manrope',Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Manrope", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color: #1B1B1B;
+  color: #1b1b1b;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -25,13 +25,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3 {
-  font-family: 'Anton', Arial;
+h1,
+h2,
+h3 {
+  font-family: "Anton", Arial;
 }
 
 header {
   height: 667px;
-  background:rgba(0, 0, 0, 0.3) url(./assets/img/header_wallpaper.jpg);
+  background: rgba(0, 0, 0, 0.3) url(./assets/img/header_wallpaper.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 header #tagline {
@@ -41,6 +46,13 @@ header #tagline {
 
 /* --------- */
 
-.search_container i {
-  
+.button_filter {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #fff;
+  width: 11rem;
+  height: 3.5rem;
+  border-radius: 0.5rem;
 }
