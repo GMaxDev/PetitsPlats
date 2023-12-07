@@ -39,8 +39,8 @@
         </span>
       </div>
     </header>
-    <main class="flex flex-col justify-between mx-24 my-6">
-      <div class="flex justify-between mb-14" id="filterZone">
+    <main class="flex flex-col justify-between mx-24 my-6" id="mainContainer">
+      <div class="flex justify-between" id="filterZone">
         <div class="flex gap-16" id="filterForm">
           <div id="ingredientsFilter">
             <button
@@ -68,7 +68,11 @@
         </div>
         <h3 id="totalRecipe" class="text-xl"></h3>
       </div>
-      <div class="grid grid-cols-3 gap-x-12 gap-y-16" id="recipeCardZone"></div>
+      <div class="flex flex-wrap gap-x-6" id="filterSpecificationZone"></div>
+      <div
+        class="grid grid-cols-3 gap-x-12 gap-y-16 mt-7"
+        id="recipeCardZone"
+      ></div>
     </main>
     <div id="app"></div>
     <script type="module" src="/src/pages/main.js"></script>
