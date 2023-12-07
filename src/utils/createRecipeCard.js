@@ -18,6 +18,10 @@ export function createRecipeCard(recipeInstances) {
       "class",
       "recipeCard h-full bg-white rounded-3xl relative"
     );
+    recipeCard.setAttribute(
+      "id",
+      recipeInstance.name
+    );
 
     recipteTime.innerHTML = recipeInstance.time + `min`;
     recipteTime.setAttribute(
