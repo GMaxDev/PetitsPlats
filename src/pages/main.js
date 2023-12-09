@@ -3,6 +3,7 @@ import { dataRecipes } from "../../data/recipes";
 import { ModelRecipe } from "../models/ModelRecipe";
 import { createRecipeCard } from "../utils/createRecipeCard";
 import { totalRecipeUpdate } from "../utils/totalRecipeUpdate";
+import { displayActiveFilter } from "../utils/displayActiveFilter";
 
 const inputSearch = document.getElementById("search");
 const recipeInstances = dataRecipes.map(
@@ -44,21 +45,6 @@ inputSearch.addEventListener("keydown", (event) => {
 
     displayActiveFilter(filterList);
     inputSearch.value = "";
+    console.log(filterList)
   }
 });
-
-function displayActiveFilter(array) {
-  const filterSpecificationZone = document.getElementById("filterSpecificationZone");
-  filterSpecificationZone.innerText = ''
-
-  array.forEach((element) => {
-    const elementBloc = document.createElement("p");
-    elementBloc.innerHTML = `${element} <i class="fa-solid fa-xmark"></i>`;
-    elementBloc.setAttribute(
-      "class",
-      "flex justify-between items-center h-14 w-52 mt-7 p-4 font-medium rounded-lg bg-amber-300 filterData"
-    );
-
-    filterSpecificationZone.appendChild(elementBloc);
-  });
-}
