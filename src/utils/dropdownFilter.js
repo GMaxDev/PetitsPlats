@@ -1,3 +1,6 @@
+import { displayActiveFilter } from "../utils/displayActiveFilter";
+import { filterList } from "../utils/filterList";
+
 export function dropdownFilter(data) {
   const dropdownIngredients = document.getElementById("ingredientList");
   const dropdownAppliance = document.getElementById("applianceList");
@@ -22,7 +25,7 @@ export function dropdownFilter(data) {
       }
     });
 
-    // ----------------------------------------------
+    // --------------
 
     const applianceName = element.appliance;
     // Vérifier si l'appareil n'a pas déjà été ajouté
@@ -35,7 +38,7 @@ export function dropdownFilter(data) {
       existingAppliances.add(applianceName);
     }
 
-    // -----------------------------------------------
+    // -------------
     element.ustensils.forEach((ustensilArray) => {
       const ustensilName = ustensilArray;
 
@@ -51,6 +54,8 @@ export function dropdownFilter(data) {
     });
   });
 
+  // -----------------------------------------------
+
   dropdownIngredients.addEventListener("click", (event) => {
     const ingredient = "ingredient"
     if (event.target.tagName === 'LI') {
@@ -60,7 +65,6 @@ export function dropdownFilter(data) {
         const liValue = event.target.innerText
         dropdownIngredients.removeChild(event.target)
         filterItemDisplay(liValue, ingredient)
-        console.log(event.target)
       }
     }
   })
@@ -106,5 +110,8 @@ function filterItemDisplay(liValue, listType) {
     liElement.innerText = liValue;
 
     focus.appendChild(liElement);
+    filterList.push(liValue);
+    displayActiveFilter(filterList)
+    console.log(filterList)
   }
 }

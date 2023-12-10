@@ -5,12 +5,12 @@ import { createRecipeCard } from "../utils/createRecipeCard";
 import { totalRecipeUpdate } from "../utils/totalRecipeUpdate";
 import { displayActiveFilter } from "../utils/displayActiveFilter";
 import { dropdownFilter } from "../utils/dropdownFilter";
+import { filterList } from "../utils/filterList";
 
 const inputSearch = document.getElementById("search");
 const recipeInstances = dataRecipes.map(
   (recipeData) => new ModelRecipe(recipeData)
 );
-let filterList = [];
 
 createRecipeCard(recipeInstances);
 totalRecipeUpdate(recipeInstances);
