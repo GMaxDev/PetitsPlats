@@ -52,13 +52,18 @@ header #tagline {
 
 /* --------- */
 
-.buttonFilter {
+.listBlocFilter {
   display: flex;
   text-align: center;
-  align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   background-color: #fff;
   width: 11rem;
-  height: 3.5rem;
   border-radius: 0.5rem;
+
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.listBlocFilter::-webkit-scrollbar {
+  width: 0;  /* Largeur de la barre de défilement à 0 pour la masquer */
 }
