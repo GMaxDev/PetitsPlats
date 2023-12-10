@@ -56,12 +56,14 @@ header #tagline {
   display: flex;
   text-align: center;
   justify-content: space-between;
-  background-color: #fff;
   width: 11rem;
-  border-radius: 0.5rem;
-
+  background-color: white;
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
+}
+
+.listBlocFilter .focus {
+  background-color: #FFD15B;
 }
 
 .listBlocFilter::-webkit-scrollbar {

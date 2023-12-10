@@ -40,11 +40,11 @@
       </div>
     </header>
     <main class="flex flex-col justify-between mx-24 my-6" id="mainContainer">
-      <div class="flex justify-between" id="filterZone">
+      <div class="flex justify-between z-1" id="filterZone">
         <div class="flex gap-16" id="filterForm">
           <div id="ingredientsFilter">
             <button
-              class="items-center px-4 font-medium listBlocFilter h-14"
+              class="items-center px-4 font-medium bg-white rounded-lg listBlocFilter h-14"
               id="ingredients"
               type="button"
             >
@@ -52,38 +52,49 @@
             </button>
             <ul
               id="ingredientList"
-              class="flex flex-col items-start pt-3.5 overflow-auto listBlocFilter h-80"
+              class="rounded-lg lex flex-col items-start pt-3.5 overflow-auto listBlocFilter h-80"
             >
               <ul
                 id="ingredientFocus"
-                class="flex flex-col items-start h-auto py-2 listBlocFilte"
-              >
-                <li>fdfd</li>
-                <li>fdfd</li>
-                <li>fdfd</li>
-                <li>fdfd</li>
-              </ul>
+                class="flex flex-col items-start h-auto py-2 focus listBlocFilter"
+              ></ul>
             </ul>
           </div>
           <div id="applianceFilter">
             <button
-              class="items-center px-4 font-medium listBlocFilter h-14"
+              class="items-center px-4 font-medium bg-white rounded-lg listBlocFilter h-14"
               id="appliance"
               type="button"
             >
               Appareils <i class="fa-solid fa-chevron-down"></i>
             </button>
-            <ul id="applianceList" class="listBlocFilter"></ul>
+            <ul
+              id="applianceList"
+              class="flex flex-col rounded-lg items-start pt-3.5 overflow-auto listBlocFilter h-80"
+            >
+              <ul
+                id="applianceFocus"
+                class="flex flex-col items-start w-auto h-auto py-2 focus listBlocFilter bg-amber-300"
+              ></ul>
+            </ul>
           </div>
           <div id="ustensilsFilter">
             <button
-              class="items-center px-4 font-medium listBlocFilter h-14"
+              class="items-center px-4 font-medium bg-white rounded-lg listBlocFilter h-14"
               id="ustensils"
               type="button"
             >
               Ustensiles <i class="fa-solid fa-chevron-down"></i>
             </button>
-            <ul id="ustensilsList" class="listBlocFilter"></ul>
+            <ul
+              id="ustensilsList"
+              class="flex flex-col rounded-lg	items-start pt-3.5 overflow-auto listBlocFilter h-80"
+            >
+              <ul
+                id="ustensilsFocus"
+                class="flex flex-col items-start h-auto py-2 focus listBlocFilter"
+              ></ul>
+            </ul>
           </div>
         </div>
         <h3 id="totalRecipe" class="text-xl"></h3>
