@@ -52,7 +52,7 @@
             </button>
             <ul
               id="ingredientList"
-              class="rounded-b-lg lex flex-col items-start pt-3.5 overflow-auto listBlocFilter h-80"
+              class="invisible rounded-b-lg lex flex-col items-start pt-3.5 overflow-auto listBlocFilter h-80"
             >
               <ul
                 id="ingredientFocus"
@@ -70,7 +70,7 @@
             </button>
             <ul
               id="applianceList"
-              class="flex flex-col rounded-b-lg items-start pt-3.5 overflow-auto listBlocFilter h-80"
+              class="invisible flex flex-col rounded-b-lg items-start pt-3.5 overflow-auto listBlocFilter h-80"
             >
               <ul
                 id="applianceFocus"
@@ -88,7 +88,7 @@
             </button>
             <ul
               id="ustensilsList"
-              class="flex flex-col rounded-b-lg items-start pt-3.5 overflow-auto listBlocFilter h-80"
+              class="invisible flex flex-col rounded-b-lg items-start pt-3.5 overflow-auto listBlocFilter h-80"
             >
               <ul
                 id="ustensilsFocus"
@@ -99,9 +99,9 @@
         </div>
         <h3 id="totalRecipe" class="text-xl"></h3>
       </div>
-      <div class="flex flex-wrap gap-x-6" id="filterSpecificationZone"></div>
+      <div class="flex flex-wrap gap-x-6 z-1" id="filterSpecificationZone"></div>
       <div
-        class="grid grid-cols-3 gap-x-12 gap-y-16 mt-7"
+        class="relative grid grid-cols-3 gap-x-12 gap-y-16 mt-7"
         id="recipeCardZone"
       ></div>
     </main>

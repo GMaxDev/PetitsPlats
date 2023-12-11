@@ -1,6 +1,7 @@
 import "../../style.css";
 import { dataRecipes } from "../../data/recipes";
 import { ModelRecipe } from "../models/ModelRecipe";
+import { displaybuttonFilter } from "../utils/displayButtonFilter";
 import { createRecipeCard } from "../utils/createRecipeCard";
 import { totalRecipeUpdate } from "../utils/totalRecipeUpdate";
 import { displayActiveFilter } from "../utils/displayActiveFilter";
@@ -11,6 +12,19 @@ const inputSearch = document.getElementById("search");
 const recipeInstances = dataRecipes.map(
   (recipeData) => new ModelRecipe(recipeData)
 );
+
+const ingredientsFilterButton = document.getElementById("ingredients");
+ingredientsFilterButton.addEventListener("click", () => {
+  displaybuttonFilter("ingredient");
+});
+const applianceFilterButton = document.getElementById("appliance");
+applianceFilterButton.addEventListener("click", () => {
+  displaybuttonFilter("appliance");
+});
+const ustensilsFilterButton = document.getElementById("ustensils");
+ustensilsFilterButton.addEventListener("click", () => {
+  displaybuttonFilter("ustensils");
+});
 
 createRecipeCard(recipeInstances);
 totalRecipeUpdate(recipeInstances);
@@ -46,8 +60,8 @@ inputSearch.addEventListener("keydown", (event) => {
 
     displayActiveFilter(filterList);
     inputSearch.value = "";
-    console.log(filterList)
+    console.log(filterList);
   }
 });
 
-dropdownFilter(recipeInstances)
+dropdownFilter(recipeInstances);
