@@ -40,9 +40,9 @@
       </div>
     </header>
     <main class="flex flex-col justify-between mx-24 my-6" id="mainContainer">
-      <div class="flex justify-between z-1" id="filterZone">
+      <div class="z-10 flex justify-between" id="filterZone">
         <div class="flex gap-16" id="filterForm">
-          <div id="ingredientsFilter">
+          <div id="ingredientsFilter" class="drop-shadow">
             <button
               class="items-center px-4 font-medium bg-white rounded-lg listBlocFilter h-14"
               id="ingredients"
@@ -50,17 +50,17 @@
             >
               Ingrédients <i class="fa-solid fa-chevron-down"></i>
             </button>
-            <ul
+            <div
               id="ingredientList"
-              class="invisible rounded-b-lg lex flex-col items-start pt-3.5 overflow-auto listBlocFilter h-80"
+              class="invisible w-0 h-0"
             >
               <ul
                 id="ingredientFocus"
                 class="flex flex-col items-start h-auto py-2 focus listBlocFilter"
               ></ul>
-            </ul>
+            </div>
           </div>
-          <div id="applianceFilter">
+          <div id="applianceFilter" class="drop-shadow">
             <button
               class="items-center px-4 font-medium bg-white rounded-lg listBlocFilter h-14"
               id="appliance"
@@ -68,17 +68,17 @@
             >
               Appareils <i class="fa-solid fa-chevron-down"></i>
             </button>
-            <ul
+            <div
               id="applianceList"
-              class="invisible flex flex-col rounded-b-lg items-start pt-3.5 overflow-auto listBlocFilter h-80"
+              class="invisible w-0 h-0"
             >
               <ul
                 id="applianceFocus"
                 class="flex flex-col items-start w-auto h-auto py-2 focus listBlocFilter bg-amber-300"
               ></ul>
-            </ul>
+            </div>
           </div>
-          <div id="ustensilsFilter">
+          <div id="ustensilsFilter" class="drop-shadow">
             <button
               class="items-center px-4 font-medium bg-white rounded-lg listBlocFilter h-14"
               id="ustensils"
@@ -86,22 +86,22 @@
             >
               Ustensiles <i class="fa-solid fa-chevron-down"></i>
             </button>
-            <ul
+            <div
               id="ustensilsList"
-              class="invisible flex flex-col rounded-b-lg items-start pt-3.5 overflow-auto listBlocFilter h-80"
+              class="invisible w-0 h-0"
             >
               <ul
                 id="ustensilsFocus"
                 class="flex flex-col items-start h-auto py-2 focus listBlocFilter"
               ></ul>
-            </ul>
+            </div>
           </div>
         </div>
         <h3 id="totalRecipe" class="text-xl"></h3>
       </div>
-      <div class="flex flex-wrap gap-x-6 z-1" id="filterSpecificationZone"></div>
+      <div class="z-0 flex flex-wrap gap-x-10" id="filterSpecificationZone"></div>
       <div
-        class="relative grid grid-cols-3 gap-x-12 gap-y-16 mt-7"
+        class="relative z-0 grid grid-cols-3 gap-x-12 gap-y-16 mt-7"
         id="recipeCardZone"
       ></div>
     </main>

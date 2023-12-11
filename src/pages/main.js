@@ -1,7 +1,7 @@
 import "../../style.css";
 import { dataRecipes } from "../../data/recipes";
 import { ModelRecipe } from "../models/ModelRecipe";
-import { displaybuttonFilter } from "../utils/displayButtonFilter";
+import { toggleButtonFilter } from "../utils/displayButtonFilter";
 import { createRecipeCard } from "../utils/createRecipeCard";
 import { totalRecipeUpdate } from "../utils/totalRecipeUpdate";
 import { displayActiveFilter } from "../utils/displayActiveFilter";
@@ -15,15 +15,15 @@ const recipeInstances = dataRecipes.map(
 
 const ingredientsFilterButton = document.getElementById("ingredients");
 ingredientsFilterButton.addEventListener("click", () => {
-  displaybuttonFilter("ingredient");
+  toggleButtonFilter("ingredient");
 });
 const applianceFilterButton = document.getElementById("appliance");
 applianceFilterButton.addEventListener("click", () => {
-  displaybuttonFilter("appliance");
+  toggleButtonFilter("appliance");
 });
 const ustensilsFilterButton = document.getElementById("ustensils");
 ustensilsFilterButton.addEventListener("click", () => {
-  displaybuttonFilter("ustensils");
+  toggleButtonFilter("ustensils");
 });
 
 createRecipeCard(recipeInstances);
