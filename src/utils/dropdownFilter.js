@@ -106,8 +106,8 @@ function filterItemDisplay(liValue, listType) {
   if (!focus.querySelector(`[filterActive="${liValue}"]`)) {
     const liElement = document.createElement("li");
     liElement.setAttribute("filterActive", liValue);
-    liElement.setAttribute("class", "rounded-none pl-4 py-2 cursor-pointer");
-    liElement.innerText = liValue;
+    liElement.setAttribute("class", "flex justify-between items-center py-2 text-left rounded-none px-4 py-2 cursor-pointer bg-amber-400 w-full");
+    liElement.innerHTML = `${liValue} <i class="cross cursor-pointer fa-solid fa-xmark"></i>`;
 
     focus.appendChild(liElement);
     filterList.push(liValue);

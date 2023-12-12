@@ -11,6 +11,7 @@ import { filterList } from "../utils/filterList";
 const inputSearch = document.getElementById("search");
 const recipeInstances = dataRecipes.map(
   (recipeData) => new ModelRecipe(recipeData)
+
 );
 
 const ingredientsFilterButton = document.getElementById("ingredients");

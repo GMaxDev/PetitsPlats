@@ -62,10 +62,6 @@ header #tagline {
   scrollbar-color: transparent transparent;
 }
 
-.listBlocFilter .focus {
-  background-color: #FFD15B;
-}
-
 .listBlocFilter::-webkit-scrollbar {
   width: 0;  /* Largeur de la barre de défilement à 0 pour la masquer */
 }
