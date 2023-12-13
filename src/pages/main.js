@@ -27,7 +27,16 @@ ustensilsFilterButton.addEventListener("click", () => {
   toggleButtonFilter("ustensils");
 });
 
-createRecipeCard(recipeInstances);
+// createRecipeCard(recipeInstances);
+const recipeCardZone = document.getElementById("recipeCardZone");
+recipeInstances.forEach((recipeInstance) => {
+  recipeCardZone.appendChild(recipeInstance.createRecipeCard())
+})
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Ton code ici
+});
+
 totalRecipeUpdate(recipeInstances);
 
 inputSearch.addEventListener("input", (event) => {

@@ -12,8 +12,8 @@ export function createRecipeCard(recipeInstances) {
     const p = document.createElement("p");
     const img = document.createElement("img");
 
-    // const cheminImage = `assets/img/`;
-
+    //------------------------------------------------------------------- 
+    
     recipeCard.setAttribute(
       "class",
       "recipeCard h-full bg-white rounded-3xl relative"
