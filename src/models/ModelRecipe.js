@@ -68,15 +68,28 @@ export class ModelRecipe {
       <div id="recipe_${this._id}" class="grid grid-cols-2 mt-4 ingredientZone"></div>
   </div>`;
 
-    let getElementById = document.getElementById(`recipe_${this._id}`);
+    // -----------------------------------------------
+
+    const ingredientZone = recipeCard.children[2].children[4];
 
     this._ingredients.forEach((ingredient) => {
       const ingredientBloc = document.createElement("div");
       ingredientBloc.setAttribute("class", "ingredientBloc h-16");
 
+      let ingredientQuantity = ingredient.quantity;
+      let ingredientUnit = ingredient.unit;
+
+      if (ingredientQuantity === undefined) {
+        ingredientQuantity = "";
+      }
+
+      if (ingredientUnit === undefined) {
+        ingredientUnit = "";
+      }
+
       ingredientBloc.innerHTML = `
-    <p class="ingredientName text-sm font-medium">${ingredient.ingredient}</p>
-    <p class="ingredientQuantity text-neutral-500 text-sm">${ingredient.quantity}${ingredient.unit}</p>`;
+      <p class="ingredientName text-sm font-medium">${ingredient.ingredient}</p>
+      <p class="ingredientQuantity text-neutral-500 text-sm">${ingredientQuantity}${ingredientUnit}</p>`;
 
       ingredientZone.appendChild(ingredientBloc);
     });

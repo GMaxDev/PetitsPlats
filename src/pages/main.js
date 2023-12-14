@@ -2,7 +2,6 @@ import "../../style.css";
 import { dataRecipes } from "../../data/recipes";
 import { ModelRecipe } from "../models/ModelRecipe";
 import { toggleButtonFilter } from "../utils/displayButtonFilter";
-import { createRecipeCard } from "../utils/createRecipeCard";
 import { totalRecipeUpdate } from "../utils/totalRecipeUpdate";
 import { displayActiveFilter } from "../utils/displayActiveFilter";
 import { dropdownFilter } from "../utils/dropdownFilter";
@@ -11,7 +10,6 @@ import { filterList } from "../utils/filterList";
 const inputSearch = document.getElementById("search");
 const recipeInstances = dataRecipes.map(
   (recipeData) => new ModelRecipe(recipeData)
-
 );
 
 const ingredientsFilterButton = document.getElementById("ingredients");
@@ -27,11 +25,10 @@ ustensilsFilterButton.addEventListener("click", () => {
   toggleButtonFilter("ustensils");
 });
 
-// createRecipeCard(recipeInstances);
 const recipeCardZone = document.getElementById("recipeCardZone");
 recipeInstances.forEach((recipeInstance) => {
-  recipeCardZone.appendChild(recipeInstance.createRecipeCard())
-})
+  recipeCardZone.appendChild(recipeInstance.createRecipeCard());
+});
 
 document.addEventListener("DOMContentLoaded", function () {
   // Ton code ici
