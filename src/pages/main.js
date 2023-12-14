@@ -12,6 +12,8 @@ const recipeInstances = dataRecipes.map(
   (recipeData) => new ModelRecipe(recipeData)
 );
 
+console.log(recipeInstances)
+
 const ingredientsFilterButton = document.getElementById("ingredients");
 ingredientsFilterButton.addEventListener("click", () => {
   toggleButtonFilter("ingredient");
