@@ -1,6 +1,7 @@
 import "../../style.css";
 import { dataRecipes } from "../../data/recipes";
 import { ModelRecipe } from "../models/ModelRecipe";
+import { RecipeManager } from "../models/RecipeManager";
 import { toggleButtonFilter } from "../utils/displayButtonFilter";
 import { totalRecipeUpdate } from "../utils/totalRecipeUpdate";
 import { displayActiveFilter } from "../utils/displayActiveFilter";
@@ -12,7 +13,14 @@ const recipeInstances = dataRecipes.map(
   (recipeData) => new ModelRecipe(recipeData)
 );
 
-console.log(recipeInstances)
+const recipes = new RecipeManager(dataRecipes);
+console.log(recipes.recipeList);
+const filter1 = recipes.recipeFilter("moule");
+console.log(filter1);
+
+const recipes2 = new RecipeManager(filter1);
+const filter2 = recipes2.recipeFilter("pomme");
+console.log(filter2);
 
 const ingredientsFilterButton = document.getElementById("ingredients");
 ingredientsFilterButton.addEventListener("click", () => {
@@ -27,10 +35,14 @@ ustensilsFilterButton.addEventListener("click", () => {
   toggleButtonFilter("ustensils");
 });
 
+// ---------------------------------------------------
+
 const recipeCardZone = document.getElementById("recipeCardZone");
 recipeInstances.forEach((recipeInstance) => {
   recipeCardZone.appendChild(recipeInstance.createRecipeCard());
 });
+
+// ---------------------------------------------------
 
 document.addEventListener("DOMContentLoaded", function () {
   // Ton code ici
@@ -38,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 totalRecipeUpdate(recipeInstances);
 
-inputSearch.addEventListener("input", (event) => {
+/*inputSearch.addEventListener("input", (event) => {
   const valueInput = event.target.value;
   const recipeCards = document.getElementsByClassName("recipeCard");
   let totalMatchRecipe = 0;
@@ -55,9 +67,20 @@ inputSearch.addEventListener("input", (event) => {
     }
   }
   totalRecipeUpdate(totalMatchRecipe);
-});
+});*/
 
 inputSearch.addEventListener("keydown", (event) => {
+  const valueInput = event.target.value;
+  if (event.key === "Enter" && valueInput.length >= 3) {
+    event.preventDefault();
+    const valeurActuelle = valueInput.trim(); //Supprime les espaces en début et fin de chaine
+    if (valeurActuelle !== "") {
+      filterList.push(valeurActuelle);
+    }
+  }
+})
+
+/*inputSearch.addEventListener("keydown", (event) => {
   const valueInput = event.target.value;
   if (event.key === "Enter") {
     event.preventDefault();
@@ -69,8 +92,8 @@ inputSearch.addEventListener("keydown", (event) => {
 
     displayActiveFilter(filterList);
     inputSearch.value = "";
-    console.log(filterList);
+    // console.log(filterList);
   }
-});
+})*/
 
-dropdownFilter(recipeInstances);
+dropdownFilter(filter2);
