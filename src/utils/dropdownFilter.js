@@ -6,9 +6,18 @@ export function dropdownFilter(data) {
   const dropdownAppliance = document.getElementById("applianceList");
   const dropdownUstensils = document.getElementById("ustensilsList");
 
-  dropdownIngredients.innerHTML = ''
-  dropdownAppliance.innerHTML = ''
-  dropdownUstensils.innerHTML = ''
+  dropdownIngredients.innerHTML = `<ul
+  id="ingredientFocus"
+  class="flex flex-col items-start h-auto focus listBlocFilter"
+></ul>`
+  dropdownAppliance.innerHTML = `<ul
+  id="applianceFocus"
+  class="flex flex-col items-start w-auto h-auto focus listBlocFilter bg-amber-300"
+></ul>`
+  dropdownUstensils.innerHTML = `<ul
+  id="ustensilsFocus"
+  class="flex flex-col items-start h-auto focus listBlocFilter"
+></ul>`
   //On créait des set pour vérifier que chaque élément de la liste est unique
   const existingIngredients = new Set();
   const existingAppliances = new Set();
@@ -67,7 +76,7 @@ export function dropdownFilter(data) {
     
       if (!filterActiveValue) {
         const liValue = event.target.innerText
-        dropdownIngredients.removeChild(event.target)
+        event.target.remove();
         filterItemDisplay(liValue, ingredient)
       }
     }
@@ -80,7 +89,7 @@ export function dropdownFilter(data) {
     
       if (!filterActiveValue) {
         const liValue = event.target.innerText
-        dropdownAppliance.removeChild(event.target)
+        event.target.remove();
         filterItemDisplay(liValue, appliance)
         console.log(event.target)
       }
@@ -94,7 +103,7 @@ export function dropdownFilter(data) {
     
       if (!filterActiveValue) {
         const liValue = event.target.innerText
-        dropdownUstensils.removeChild(event.target)
+        event.target.remove();
         filterItemDisplay(liValue, ustensils)
         console.log(event.target)
       }

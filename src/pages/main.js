@@ -3,7 +3,6 @@ import { dataRecipes } from "../../data/recipes";
 import { RecipeManager } from "../models/RecipeManager";
 import { toggleButtonFilter } from "../utils/displayButtonFilter";
 import { totalRecipeUpdate } from "../utils/totalRecipeUpdate";
-import { displayActiveFilter } from "../utils/displayActiveFilter";
 import { dropdownFilter } from "../utils/dropdownFilter";
 
 const inputSearch = document.getElementById("search");
@@ -42,20 +41,21 @@ inputSearch.addEventListener("keydown", (event) => {
     event.preventDefault();
     const valeurActuelle = valueInput.trim(); //Supprime les espaces en début et fin de chaine
     if (valeurActuelle !== "") {
-      let filter1 = recipes.recipeFilter(valeurActuelle);
+      const searchFilter = recipes.recipeFilter(valeurActuelle);
       recipeCardZone.innerHTML = ''
 
       console.log("toto");
-      dropdownFilter(filter1);
+      dropdownFilter(searchFilter);
 
-      recipes = new RecipeManager(filter1);
+      recipes = new RecipeManager(searchFilter);
       recipeCards = recipes.createRecipeCards();
       recipeCards.forEach((recipeCard) => {
         recipeCardZone.appendChild(recipeCard);
       });
-      console.log(filter1);
+      console.log(searchFilter);
     }
   }
 });
 
 dropdownFilter(recipes.recipeList);
+console.log(recipes.recipeList);
