@@ -47,9 +47,6 @@ export class ModelRecipe {
     return this._ustensils;
   }
 
-  get compositionsRecipeList() {
-    
-  }
   // ----------------------------------------------
 
   createRecipeCard() {

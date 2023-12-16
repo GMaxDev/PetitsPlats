@@ -5,6 +5,10 @@ export function dropdownFilter(data) {
   const dropdownIngredients = document.getElementById("ingredientList");
   const dropdownAppliance = document.getElementById("applianceList");
   const dropdownUstensils = document.getElementById("ustensilsList");
+
+  dropdownIngredients.innerHTML = ''
+  dropdownAppliance.innerHTML = ''
+  dropdownUstensils.innerHTML = ''
   //On créait des set pour vérifier que chaque élément de la liste est unique
   const existingIngredients = new Set();
   const existingAppliances = new Set();

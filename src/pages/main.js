@@ -1,26 +1,14 @@
 import "../../style.css";
 import { dataRecipes } from "../../data/recipes";
-import { ModelRecipe } from "../models/ModelRecipe";
 import { RecipeManager } from "../models/RecipeManager";
 import { toggleButtonFilter } from "../utils/displayButtonFilter";
 import { totalRecipeUpdate } from "../utils/totalRecipeUpdate";
 import { displayActiveFilter } from "../utils/displayActiveFilter";
 import { dropdownFilter } from "../utils/dropdownFilter";
-import { filterList } from "../utils/filterList";
 
 const inputSearch = document.getElementById("search");
-const recipeInstances = dataRecipes.map(
-  (recipeData) => new ModelRecipe(recipeData)
-);
 
-const recipes = new RecipeManager(dataRecipes);
-console.log(recipes.recipeList);
-const filter1 = recipes.recipeFilter("moule");
-console.log(filter1);
-
-const recipes2 = new RecipeManager(filter1);
-const filter2 = recipes2.recipeFilter("pomme");
-console.log(filter2);
+let recipes = new RecipeManager(dataRecipes);
 
 const ingredientsFilterButton = document.getElementById("ingredients");
 ingredientsFilterButton.addEventListener("click", () => {
@@ -38,36 +26,15 @@ ustensilsFilterButton.addEventListener("click", () => {
 // ---------------------------------------------------
 
 const recipeCardZone = document.getElementById("recipeCardZone");
-recipeInstances.forEach((recipeInstance) => {
-  recipeCardZone.appendChild(recipeInstance.createRecipeCard());
+recipeCardZone.innerHTML = "";
+let recipeCards = recipes.createRecipeCards();
+recipeCards.forEach((recipeCard) => {
+  recipeCardZone.appendChild(recipeCard);
 });
 
 // ---------------------------------------------------
 
-document.addEventListener("DOMContentLoaded", function () {
-  // Ton code ici
-});
-
-totalRecipeUpdate(recipeInstances);
-
-/*inputSearch.addEventListener("input", (event) => {
-  const valueInput = event.target.value;
-  const recipeCards = document.getElementsByClassName("recipeCard");
-  let totalMatchRecipe = 0;
-
-  for (let i = 0; i < recipeInstances.length; i++) {
-    const currentRecipeCard = recipeCards[i];
-    const textContent = currentRecipeCard.id.toLowerCase();
-
-    if (!textContent.includes(valueInput.toLowerCase())) {
-      recipeCards[i].style.display = "none";
-    } else {
-      recipeCards[i].style.display = "block";
-      totalMatchRecipe++;
-    }
-  }
-  totalRecipeUpdate(totalMatchRecipe);
-});*/
+totalRecipeUpdate(recipeCards);
 
 inputSearch.addEventListener("keydown", (event) => {
   const valueInput = event.target.value;
@@ -75,25 +42,20 @@ inputSearch.addEventListener("keydown", (event) => {
     event.preventDefault();
     const valeurActuelle = valueInput.trim(); //Supprime les espaces en début et fin de chaine
     if (valeurActuelle !== "") {
-      filterList.push(valeurActuelle);
+      let filter1 = recipes.recipeFilter(valeurActuelle);
+      recipeCardZone.innerHTML = ''
+
+      console.log("toto");
+      dropdownFilter(filter1);
+
+      recipes = new RecipeManager(filter1);
+      recipeCards = recipes.createRecipeCards();
+      recipeCards.forEach((recipeCard) => {
+        recipeCardZone.appendChild(recipeCard);
+      });
+      console.log(filter1);
     }
   }
-})
+});
 
-/*inputSearch.addEventListener("keydown", (event) => {
-  const valueInput = event.target.value;
-  if (event.key === "Enter") {
-    event.preventDefault();
-
-    const valeurActuelle = valueInput.trim();
-    if (valeurActuelle !== "") {
-      filterList.push(valeurActuelle);
-    }
-
-    displayActiveFilter(filterList);
-    inputSearch.value = "";
-    // console.log(filterList);
-  }
-})*/
-
-dropdownFilter(filter2);
+dropdownFilter(recipes.recipeList);

@@ -1,6 +1,9 @@
+import { ModelRecipe } from './ModelRecipe';
 export class RecipeManager {
   constructor(data) {
-    this._data = data;
+    // this._data = data;
+    // Utilisez ModelRecipe pour créer des instances de recette
+    this._data = data.map(recipeData => new ModelRecipe(recipeData));
   }
 
   get recipeList() {
@@ -30,4 +33,7 @@ export class RecipeManager {
     return arrayFilterResult
   }
   
+  createRecipeCards() {
+    return this._data.map(recipe => recipe.createRecipeCard());
+  }
 }
