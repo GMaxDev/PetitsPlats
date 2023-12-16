@@ -16,7 +16,7 @@ function displaybuttonFilter(filterName) {
   const buttonFilter = document.getElementById(buttonName);
   console.log(buttonFilter)
 
-  buttonFilter.setAttribute("class", "visible list-none absolute flex flex-col rounded-b-lg items-start pt-3.5 overflow-auto listBlocFilter h-80 z-1")
+  buttonFilter.setAttribute("class", "visible list-none absolute flex flex-col rounded-b-lg items-start pt-3.5 overflow-auto listBlocFilter max-h-80 z-1")
 }
 
 function closebuttonFilter(filterName) {
