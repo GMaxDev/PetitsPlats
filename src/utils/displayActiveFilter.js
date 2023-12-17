@@ -1,17 +1,15 @@
 import { dataRecipes } from "../../data/recipes";
 import { ModelRecipe } from "../models/ModelRecipe";
+import { ingredientList, applianceList, ustensilsList } from "./filterList";
 
 const recipeInstances = dataRecipes.map(
   (recipeData) => new ModelRecipe(recipeData)
 );
 
+// Affiche le tableau de tous les filtres dans une div
 export function displayActiveFilter(data) {
   const filterSpecificationZone = document.getElementById("filterSpecificationZone");
   filterSpecificationZone.innerText = "";
-
-  const ingredientList = [];
-  const applianceList = [];
-  const ustensilsList = [];
 
   // Vérifie si data est une chaîne de caractères
   if (typeof data === 'string') {
@@ -49,8 +47,10 @@ export function displayActiveFilter(data) {
 
       filterSpecificationZone.appendChild(elementBloc);
     });
+    
   }
   
+  // Reourne le type de l'élément
   function findMatchType(element) {
     const normalizedElement = element.toLowerCase();
     for (const recipe of recipeInstances) {
@@ -61,7 +61,6 @@ export function displayActiveFilter(data) {
           return 'Ingredient';
         }
       }
-
       // Vérifie l'appareil
       if (recipe.appliance.toLowerCase() === normalizedElement) {
         applianceList.push(element);

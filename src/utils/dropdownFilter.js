@@ -1,6 +1,7 @@
 import { displayActiveFilter } from "../utils/displayActiveFilter";
 import { filterList } from "../utils/filterList";
 
+// Ajoute des tableaux dans des listes de filtres
 export function dropdownFilter(data) {
   const dropdownIngredients = document.getElementById("ingredientList");
   const dropdownAppliance = document.getElementById("applianceList");
@@ -31,7 +32,7 @@ export function dropdownFilter(data) {
       if (!existingIngredients.has(ingredientName)) {
         const ingredientItemLi = document.createElement("li");
         ingredientItemLi.innerHTML = ingredientName;
-        ingredientItemLi.setAttribute("class", "pl-4 py-2 cursor-pointer");
+        ingredientItemLi.setAttribute("class", "pl-4 py-2 cursor-pointer ingredient");
         dropdownIngredients.appendChild(ingredientItemLi);
 
         existingIngredients.add(ingredientName);
@@ -45,7 +46,7 @@ export function dropdownFilter(data) {
     if (!existingAppliances.has(applianceName)) {
       const applianceItemLi = document.createElement("li");
       applianceItemLi.innerHTML = applianceName;
-      applianceItemLi.setAttribute("class", "pl-4 py-2 cursor-pointer");
+      applianceItemLi.setAttribute("class", "pl-4 py-2 cursor-pointer appliance");
       dropdownAppliance.appendChild(applianceItemLi);
 
       existingAppliances.add(applianceName);
@@ -59,7 +60,7 @@ export function dropdownFilter(data) {
       if (!existingUstensils.has(ustensilName)) {
         const ustensilItemLi = document.createElement("li");
         ustensilItemLi.innerHTML = ustensilName;
-        ustensilItemLi.setAttribute("class", "pl-4 py-2 cursor-pointer");
+        ustensilItemLi.setAttribute("class", "pl-4 py-2 cursor-pointer ustensil");
         dropdownUstensils.appendChild(ustensilItemLi);
 
         existingUstensils.add(ustensilName);
@@ -69,62 +70,81 @@ export function dropdownFilter(data) {
 
   // -----------------------------------------------
 
-  dropdownIngredients.addEventListener("click", (event) => {
-    const ingredient = "ingredient"
-    if (event.target.tagName === 'LI') {
-      const filterActiveValue = event.target.getAttribute("filteractive");
-    
-      if (!filterActiveValue) {
-        const liValue = event.target.innerText
-        event.target.remove();
-        filterItemDisplay(liValue, ingredient)
-      }
-    }
-  })
+  dropdownIngredients.addEventListener("click", (event) => handleFilterItemClick(event, "ingredient"));
+  dropdownAppliance.addEventListener("click", (event) => handleFilterItemClick(event, "appliance"));
+  dropdownUstensils.addEventListener("click", (event) => handleFilterItemClick(event, "ustensils"));
 
-  dropdownAppliance.addEventListener("click", (event) => {
-    const appliance = "appliance"
-    if (event.target.tagName === 'LI') {
-      const filterActiveValue = event.target.getAttribute("filteractive");
-    
-      if (!filterActiveValue) {
-        const liValue = event.target.innerText
-        event.target.remove();
-        filterItemDisplay(liValue, appliance)
-        console.log(event.target)
-      }
-    }
-  })
-
-  dropdownUstensils.addEventListener("click", (event) => {
-    const ustensils = "ustensils"
-    if (event.target.tagName === 'LI') {
-      const filterActiveValue = event.target.getAttribute("filteractive");
-    
-      if (!filterActiveValue) {
-        const liValue = event.target.innerText
-        event.target.remove();
-        filterItemDisplay(liValue, ustensils)
-        console.log(event.target)
-      }
-    }
-  })
 }
 
 function filterItemDisplay(liValue, listType) {
   const idList = listType + "Focus";
   const focus = document.getElementById(idList);
 
-  // Vérifie si un élément avec le même ID existe déjà
-  if (!focus.querySelector(`[filterActive="${liValue}"]`)) {
+  if (!focus.querySelector(`[filterActive="${liValue}"]`) && filterList.indexOf(liValue) === -1) {
+    // Ajoute à la liste focus
     const liElement = document.createElement("li");
     liElement.setAttribute("filterActive", liValue);
-    liElement.setAttribute("class", "flex justify-between items-center py-2 text-left rounded-none px-4 py-2 cursor-pointer bg-amber-400 w-full");
+    liElement.setAttribute("class", "flex justify-between items-center h-14 text-left rounded-none px-4 py-2 cursor-pointer bg-amber-400 w-full");
     liElement.innerHTML = `${liValue} <i class="cross cursor-pointer fa-solid fa-xmark"></i>`;
 
+    liElement.querySelector(".cross").addEventListener("click", () => {
+      // Supprime de la liste focus et de la liste principale
+      liElement.removeAttribute('filterActive')
+      
+      removeFilter(liValue);
+    });
+
     focus.appendChild(liElement);
+
+    // Ajoute à la liste principale
     filterList.push(liValue);
-    displayActiveFilter(filterList)
-    console.log(filterList)
+    displayActiveFilter(filterList);
+  }
+}
+
+
+function removeFilter(liValue, listType) {
+  // Supprimez l'élément de la liste principale
+  const indexInFilterList = filterList.indexOf(liValue);
+  if (indexInFilterList !== -1) {
+    filterList.splice(indexInFilterList, 1);
+    displayActiveFilter(filterList);
+  }
+
+  // Si listType est défini, cela signifie que l'élément a été supprimé de la zone de spécification du filtre.
+  // Dans ce cas, n'ajoutez pas l'élément de nouveau à la liste d'origine.
+  if (!listType) {
+    // Récupérez le dropdown d'origine
+    let dropdown;
+    if (listType === "ingredient") {
+      dropdown = document.getElementById("ingredientList");
+    } else if (listType === "appliance") {
+      dropdown = document.getElementById("applianceList");
+    } else if (listType === "ustensils") {
+      dropdown = document.getElementById("ustensilsList");
+    }
+
+    // Vérifiez si le dropdown est défini avant d'ajouter l'élément
+    if (dropdown) {
+      // Ajoutez l'élément de nouveau au dropdown
+      const liElement = document.createElement("li");
+      liElement.innerHTML = liValue;
+      liElement.setAttribute("class", "pl-4 py-2 cursor-pointer");
+      dropdown.appendChild(liElement);
+    }
+  }
+}
+
+
+
+function handleFilterItemClick(event, listType) {
+  if (event.target.tagName === 'LI') {
+    const filterActiveValue = event.target.getAttribute("filteractive");
+
+    if (!filterActiveValue) {
+      const liValue = event.target.innerText;
+      event.target.remove();
+      filterItemDisplay(liValue, listType);
+    }
   }
 }

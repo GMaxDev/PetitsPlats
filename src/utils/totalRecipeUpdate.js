@@ -1,3 +1,4 @@
+// Met à jour le nombre de recettes affichée
 export function totalRecipeUpdate(data) {
   const totalRecipe = document.getElementById("totalRecipe");
   

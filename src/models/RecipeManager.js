@@ -29,7 +29,6 @@ export class RecipeManager {
         return false;
       });
     });
-  
     return arrayFilterResult
   }
   
