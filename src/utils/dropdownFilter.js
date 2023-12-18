@@ -24,9 +24,10 @@ export function dropdownFilter(data) {
   const existingUstensils = new Set();
 
   data.forEach((element) => {
+
+    // En fonction des du type de l'élément, on l'ajoute au dropdown correspondant 
     element.ingredients.forEach((ingredientArray) => {
       const ingredientName = ingredientArray.ingredient;
-
       // Vérifier si l'ingrédient n'a pas déjà été ajouté
       if (!existingIngredients.has(ingredientName)) {
         const ingredientItemLi = document.createElement("li");
@@ -37,8 +38,6 @@ export function dropdownFilter(data) {
         existingIngredients.add(ingredientName);
       }
     });
-
-    // --------------
 
     const applianceName = element.appliance;
     // Vérifier si l'appareil n'a pas déjà été ajouté
@@ -51,10 +50,8 @@ export function dropdownFilter(data) {
       existingAppliances.add(applianceName);
     }
 
-    // -------------
     element.ustensils.forEach((ustensilArray) => {
       const ustensilName = ustensilArray;
-
       // Vérifier si l'ustensile n'a pas déjà été ajouté
       if (!existingUstensils.has(ustensilName)) {
         const ustensilItemLi = document.createElement("li");
@@ -69,6 +66,8 @@ export function dropdownFilter(data) {
 
   // -----------------------------------------------
 
+  // Si on clique sur un élément d'un dropdown, on le déclare focus
+  
   dropdownIngredients.addEventListener("click", (event) => {
     const ingredient = "ingredient"
     if (event.target.tagName === 'LI') {

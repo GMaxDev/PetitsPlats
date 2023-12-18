@@ -44,7 +44,6 @@ inputSearch.addEventListener("keydown", (event) => {
       const searchFilter = recipes.recipeFilter(valeurActuelle);
       recipeCardZone.innerHTML = ''
 
-      console.log("toto");
       dropdownFilter(searchFilter);
 
       recipes = new RecipeManager(searchFilter);
