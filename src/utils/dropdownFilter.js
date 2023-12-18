@@ -90,8 +90,6 @@ function filterItemDisplay(liValue, listType) {
     liElement.querySelector(".cross").addEventListener("click", () => {
       // Supprime de la liste focus et de la liste principale
       liElement.removeAttribute('filterActive')
-      
-      removeFilter(liValue);
     });
 
     focus.appendChild(liElement);
@@ -101,40 +99,6 @@ function filterItemDisplay(liValue, listType) {
     displayActiveFilter(filterList);
   }
 }
-
-
-function removeFilter(liValue, listType) {
-  // Supprimez l'élément de la liste principale
-  const indexInFilterList = filterList.indexOf(liValue);
-  if (indexInFilterList !== -1) {
-    filterList.splice(indexInFilterList, 1);
-    displayActiveFilter(filterList);
-  }
-
-  // Si listType est défini, cela signifie que l'élément a été supprimé de la zone de spécification du filtre.
-  // Dans ce cas, n'ajoutez pas l'élément de nouveau à la liste d'origine.
-  if (!listType) {
-    // Récupérez le dropdown d'origine
-    let dropdown;
-    if (listType === "ingredient") {
-      dropdown = document.getElementById("ingredientList");
-    } else if (listType === "appliance") {
-      dropdown = document.getElementById("applianceList");
-    } else if (listType === "ustensils") {
-      dropdown = document.getElementById("ustensilsList");
-    }
-
-    // Vérifiez si le dropdown est défini avant d'ajouter l'élément
-    if (dropdown) {
-      // Ajoutez l'élément de nouveau au dropdown
-      const liElement = document.createElement("li");
-      liElement.innerHTML = liValue;
-      liElement.setAttribute("class", "pl-4 py-2 cursor-pointer");
-      dropdown.appendChild(liElement);
-    }
-  }
-}
-
 
 
 function handleFilterItemClick(event, listType) {
