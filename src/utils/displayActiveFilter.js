@@ -1,7 +1,6 @@
 import { dataRecipes } from "../../data/recipes";
 import { ModelRecipe } from "../models/ModelRecipe";
 import {
-  filterList,
   ingredientList,
   applianceList,
   ustensilsList,
@@ -37,8 +36,8 @@ export function displayActiveFilter(data) {
     // });
 
     // Nouvelle logique pour comparer avec le fichier JSON de recettes
-    const matchType = findMatchType(element);
-    console.log(`Correspondance pour ${element} : ${matchType}`);
+    // const matchType = findMatchType(element);
+    // console.log(`Correspondance pour ${element} : ${matchType}`);
     filterSpecificationZone.appendChild(elementBloc);
   });
   // Aucune correspondance trouvée

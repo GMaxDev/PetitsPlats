@@ -11,9 +11,9 @@ export class RecipeManager {
   }
 
   recipeFilter(filter) {
-    // Convertit le filtre en minuscules pour une recherche insensible à la casse
-    const lowercaseFilter = filter.toLowerCase();
-  
+    const lowercaseFilter = filter;
+    // const lowercaseFilter = filter.toLowerCase(); // Convertit le filtre en minuscule
+    
     // Utilise la méthode filter pour créer un nouveau tableau contenant les éléments qui passent le filtre
     const arrayFilterResult = this.recipeList.filter(recipe => {
       // Vérifie si le filtre correspond à n'importe quelle propriété de la recette
