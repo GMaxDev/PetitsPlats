@@ -113,7 +113,7 @@ function filterItemDisplay(liValue) {
   filterList.push(liValue.innerText); // Ajoute à la liste des filtres
   displayActiveFilter(filterList); // Affiche l'élément dans la zone de filtre globale
 
-  console.log(filterRecipes(mainSearch[0], filterList));
+  filterRecipes(mainSearch[0], filterList)
 }
 
 function filterRecipes(recipes, searchTerms) {
@@ -137,8 +137,12 @@ function filterRecipes(recipes, searchTerms) {
     if (termsFound) {
       console.log('La recette correspond à tous les termes :', recipe);
       listNewRecipes++;
-    } else {
+    } 
+    else {
       console.log('La recette ne correspond pas aux filtres', recipe)
+      const actualRecipe = document.getElementById(recipe.name)
+      actualRecipe.style.display = 'none'
+      console.log(actualRecipe)
     }
   }
 

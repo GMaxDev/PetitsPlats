@@ -5,7 +5,7 @@ import { RecipeManager } from "../models/RecipeManager";
 import { toggleButtonFilter } from "../utils/displayButtonFilter";
 import { totalRecipeUpdate } from "../utils/totalRecipeUpdate";
 import { dropdownFilter } from "../utils/dropdownFilter";
-import { filterList, mainSearch } from "../utils/filterList";
+import { mainSearch } from "../utils/filterList";
 
 // Sélectionnez les éléments DOM principaux
 const inputSearch = document.getElementById("search");
