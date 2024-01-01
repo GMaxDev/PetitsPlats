@@ -21,10 +21,12 @@ export function displayActiveFilter(data) {
   data.forEach((element) => {
     const elementBloc = document.createElement("p");
     elementBloc.innerHTML = `${element} <i class="cross cursor-pointer fa-solid fa-xmark"></i>`;
+    elementBloc.setAttribute('id', `${element}`)
     elementBloc.setAttribute(
       "class",
       "flex justify-between items-center h-14 w-52 mt-7 p-4 font-medium rounded-lg bg-amber-300"
     );
+    elementBloc.setAttribute("data-filteractive", "true")
 
     // elementBloc.querySelector(".cross").addEventListener("click", () => {
     //   // Retirer l'élément spécifique de filterList

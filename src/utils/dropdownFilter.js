@@ -1,5 +1,6 @@
 import { displayActiveFilter } from "../utils/displayActiveFilter";
 import { filterList, mainSearch } from "../utils/filterList";
+import { totalRecipeUpdate } from "../utils/totalRecipeUpdate";
 
 const dropdownIngredients = document.getElementById("ingredientList");
 const dropdownAppliance = document.getElementById("applianceList");
@@ -102,19 +103,26 @@ function filterItemDisplay(liValue) {
   // Ajoute à la liste des filtres sélectionnés
   const parentList = liValue.parentElement;
 
+  const crossIcon = document.createElement("i");
+  crossIcon.setAttribute("class", "cross cursor-pointer fa-solid fa-xmark");
+  crossIcon.addEventListener("click", () => {
+    deactivateFilter(liValue);
+  });
+
   liValue.setAttribute("data-filteractive", "true");
   liValue.setAttribute(
     "class",
     "flex justify-between items-center h-14 text-left rounded-none px-4 py-2 cursor-pointer bg-amber-400 w-full"
   );
-  liValue.innerHTML += `<i class="cross cursor-pointer fa-solid fa-xmark"></i>`;
+  liValue.appendChild(crossIcon);
 
   parentList.prepend(liValue); // Place l'élément focus en haut de la liste correspondante
   filterList.push(liValue.innerText); // Ajoute à la liste des filtres
   displayActiveFilter(filterList); // Affiche l'élément dans la zone de filtre globale
 
-  filterRecipes(mainSearch[0], filterList)
+  filterRecipes(mainSearch[0], filterList);
 }
+
 
 function filterRecipes(recipes, searchTerms) {
   let listNewRecipes = 0;
@@ -134,17 +142,47 @@ function filterRecipes(recipes, searchTerms) {
       });
     });
 
+    const actualRecipe = document.getElementById(recipe.name)
     if (termsFound) {
       console.log('La recette correspond à tous les termes :', recipe);
       listNewRecipes++;
+      actualRecipe.style.display = 'block'
     } 
     else {
       console.log('La recette ne correspond pas aux filtres', recipe)
-      const actualRecipe = document.getElementById(recipe.name)
       actualRecipe.style.display = 'none'
       console.log(actualRecipe)
     }
   }
 
-  console.log('Nombre de recettes correspondantes: ' + listNewRecipes);
+  console.log('Nombre de recettes correspondantes: ' + listNewRecipes); 
+  totalRecipeUpdate(listNewRecipes)
+}
+
+function deactivateFilter(liValue) {
+  liValue.removeAttribute("data-filteractive");
+  liValue.setAttribute("class", "pl-4 py-2 cursor-pointer"); // Remet le design initial
+
+  // Retire l'élément de la liste des filtres
+  const filterIndex = filterList.indexOf(liValue.innerText);
+  if (filterIndex !== -1) {
+    filterList.splice(filterIndex, 1);
+  }
+
+  // Retire l'élément de l'affichage global des filtres
+  displayActiveFilter(filterList);
+
+  // Supprime uniquement la croix de l'élément <i>
+  const crossIcon = liValue.querySelector(".cross");
+  if (crossIcon) {
+    crossIcon.remove();
+  }
+
+  // Déplace l'élément à la fin de la liste des éléments sélectionnés
+  const parentList = liValue.parentElement;
+  parentList.appendChild(liValue);
+
+  // Met à jour les recettes en fonction des filtres
+  filterRecipes(mainSearch[0], filterList);
+  console.log(filterList);
 }
