@@ -30,6 +30,8 @@ ustensilsFilterButton.addEventListener("click", () => {
 
 // Créez et affichez les cartes de recette initiales
 recipeCardZone.innerHTML = "";
+console.log(recipes.recipeList)
+
 let recipeCards = recipes.createRecipeCards();
 recipeCards.forEach((recipeCard) => {
   recipeCardZone.appendChild(recipeCard);
@@ -69,4 +71,5 @@ inputSearch.addEventListener("keydown", (event) => {
 
 // Affichez les filtres déroulants initiaux
 dropdownFilter(recipes.recipeList);
-mainSearch.push(recipes)
+mainSearch.push(recipes._data)
+console.log(mainSearch)

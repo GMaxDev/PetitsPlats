@@ -95,7 +95,6 @@ function handleFilterItemClick(event) {
   const liValue = event.target;
   if (!filterActiveValue && liValue.nodeName === "LI") {
     filterItemDisplay(liValue);
-    console.log(event)
   }
 }
 
@@ -113,23 +112,35 @@ function filterItemDisplay(liValue) {
   parentList.prepend(liValue); // Place l'élément focus en haut de la liste correspondante
   filterList.push(liValue.innerText); // Ajoute à la liste des filtres
   displayActiveFilter(filterList); // Affiche l'élément dans la zone de filtre globale
-    
-  // const filteredRecipes = filterRecipes(mainSearch, filterList);
-  // Affichage des recettes filtrées dans la console
-  console.log(mainSearch[0]);
-  console.log(filterList);
 
+  console.log(filterRecipes(mainSearch[0], filterList));
 }
 
 function filterRecipes(recipes, searchTerms) {
-  // Filtrer les recettes
-  const filteredRecipes = recipes.filter(recipe => {
-    // Récupérer tous les ingrédients de la recette
-    const recipeIngredients = recipe._ingredients.map(ingredient => ingredient.ingredient.toLowerCase());
+  let listNewRecipes = 0;
 
-    // Vérifier si tous les termes de recherche sont présents dans les ingrédients
-    return searchTerms.every(term => recipeIngredients.includes(term.toLowerCase()));
-  });
+  for (let i = 0; i < recipes.length; i++) {
+    const recipe = recipes[i];
 
-  return filteredRecipes;
+    // Vérifie si tous les termes de recherche sont présents dans la recette
+    const termsFound = searchTerms.every(term => {
+      return Object.values(recipe).some(value => {
+        if (typeof value === 'string') {
+          return value.toLowerCase().includes(term.toLowerCase());
+        } else if (Array.isArray(value)) {
+          return value.some(item => typeof item === 'string' && item.toLowerCase().includes(term.toLowerCase()));
+        }
+        return false;
+      });
+    });
+
+    if (termsFound) {
+      console.log('La recette correspond à tous les termes :', recipe);
+      listNewRecipes++;
+    } else {
+      console.log('La recette ne correspond pas aux filtres', recipe)
+    }
+  }
+
+  console.log('Nombre de recettes correspondantes: ' + listNewRecipes);
 }
