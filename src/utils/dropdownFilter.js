@@ -91,69 +91,35 @@ export function dropdownFilter(data) {
 }
 
 // On vérifie l'état de attribut 'filteractive'
-function handleFilterItemClick(event) {
+export function handleFilterItemClick(event) {
   const filterActiveValue = event.target.dataset.filteractive;
   const liValue = event.target;
   if (!filterActiveValue && liValue.nodeName === "LI") {
-    filterItemDisplay(liValue);
-  }
-}
-
-function filterItemDisplay(liValue) {
-  // Ajoute à la liste des filtres sélectionnés
-  const parentList = liValue.parentElement;
-
-  const crossIcon = document.createElement("i");
-  crossIcon.setAttribute("class", "cross cursor-pointer fa-solid fa-xmark");
-  crossIcon.addEventListener("click", () => {
-    deactivateFilter(liValue);
-  });
-
-  liValue.setAttribute("data-filteractive", "true");
-  liValue.setAttribute(
-    "class",
-    "flex justify-between items-center h-14 text-left rounded-none px-4 py-2 cursor-pointer bg-amber-400 w-full"
-  );
-  liValue.appendChild(crossIcon);
-
-  parentList.prepend(liValue); // Place l'élément focus en haut de la liste correspondante
-  filterList.push(liValue.innerText); // Ajoute à la liste des filtres
-  displayActiveFilter(filterList); // Affiche l'élément dans la zone de filtre globale
-
-  filterRecipes(mainSearch[0], filterList);
-}
-
-
-function filterRecipes(recipes, searchTerms) {
-  let listNewRecipes = 0;
-
-  for (let i = 0; i < recipes.length; i++) {
-    const recipe = recipes[i];
-
-    // Vérifie si tous les termes de recherche sont présents dans la recette
-    const termsFound = searchTerms.every(term => {
-      return Object.values(recipe).some(value => {
-        if (typeof value === 'string') {
-          return value.toLowerCase().includes(term.toLowerCase());
-        } else if (Array.isArray(value)) {
-          return value.some(item => typeof item === 'string' && item.toLowerCase().includes(term.toLowerCase()));
-        }
-        return false;
-      });
+    const parentList = liValue.parentElement;
+  
+    const crossIcon = document.createElement("i");
+    crossIcon.setAttribute("class", "cross cursor-pointer fa-solid fa-xmark");
+    crossIcon.addEventListener("click", () => {
+      deactivateFilter(liValue);
     });
-
-    const actualRecipe = document.getElementById(recipe.name)
-    if (termsFound) {
-      console.log('La recette correspond à tous les termes :', recipe);
-      listNewRecipes++;
-      actualRecipe.style.display = 'block'
-    } 
-    else {
-      console.log('La recette ne correspond pas aux filtres', recipe)
-      actualRecipe.style.display = 'none'
-      console.log(actualRecipe)
-    }
+  
+    liValue.setAttribute("data-filteractive", "true");
+    liValue.setAttribute(
+      "class",
+      "flex justify-between items-center h-14 text-left rounded-none px-4 py-2 cursor-pointer bg-amber-400 w-full"
+    );
+    liValue.appendChild(crossIcon);
+  
+    parentList.prepend(liValue); // Place l'élément focus en haut de la liste correspondante
+    filterList.push(liValue.innerText); // Ajoute à la liste des filtres
+    displayActiveFilter(filterList); // Affiche l'élément dans la zone de filtre globale
+  
+    // filterRecipes(mainSearch[0], filterList);  
   }
+}
+
+export function filterRecipes(recipes, searchTerms) {
+  let listNewRecipes = document.querySelectorAll('.recipeCard').length;
 
   console.log('Nombre de recettes correspondantes: ' + listNewRecipes); 
   totalRecipeUpdate(listNewRecipes)
@@ -183,6 +149,6 @@ function deactivateFilter(liValue) {
   parentList.appendChild(liValue);
 
   // Met à jour les recettes en fonction des filtres
-  filterRecipes(mainSearch[0], filterList);
+  filterRecipes(mainSearch.current, filterList);
   console.log(filterList);
 }

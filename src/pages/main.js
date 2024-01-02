@@ -4,8 +4,12 @@ import { dataRecipes } from "../../data/recipes";
 import { RecipeManager } from "../models/RecipeManager";
 import { toggleButtonFilter } from "../utils/displayButtonFilter";
 import { totalRecipeUpdate } from "../utils/totalRecipeUpdate";
-import { dropdownFilter } from "../utils/dropdownFilter";
-import { mainSearch } from "../utils/filterList";
+import {
+  dropdownFilter,
+  handleFilterItemClick,
+  filterRecipes,
+} from "../utils/dropdownFilter";
+import { mainSearch, filterList } from "../utils/filterList";
 
 // Sélectionnez les éléments DOM principaux
 const inputSearch = document.getElementById("search");
@@ -13,6 +17,10 @@ const ingredientsFilterButton = document.getElementById("ingredients");
 const applianceFilterButton = document.getElementById("appliance");
 const ustensilsFilterButton = document.getElementById("ustensils");
 const recipeCardZone = document.getElementById("recipeCardZone");
+
+const dropdownIngredients = document.getElementById("ingredientList");
+const dropdownAppliance = document.getElementById("applianceList");
+const dropdownUstensils = document.getElementById("ustensilsList");
 
 // Créez une instance de RecipeManager
 let recipes = new RecipeManager(dataRecipes);
@@ -30,7 +38,7 @@ ustensilsFilterButton.addEventListener("click", () => {
 
 // Créez et affichez les cartes de recette initiales
 recipeCardZone.innerHTML = "";
-console.log(recipes.recipeList)
+console.log(recipes.recipeList);
 
 let recipeCards = recipes.createRecipeCards();
 recipeCards.forEach((recipeCard) => {
@@ -45,31 +53,45 @@ inputSearch.addEventListener("keydown", (event) => {
   const valueInput = event.target.value;
   if (event.key === "Enter" && valueInput.length >= 3) {
     event.preventDefault();
-    event.target.value = ''
+    event.target.value = "";
     const valeurActuelle = valueInput.trim();
     if (valeurActuelle !== "") {
       // Filtrer les recettes en fonction du mot-clé saisi
-      recipes = new RecipeManager(dataRecipes);
-      const searchFilter = recipes.recipeFilter(valeurActuelle);
+      const recipeList = recipes.recipeFilter(valeurActuelle);
 
-      mainSearch.splice(0, mainSearch.length)
-      mainSearch.push(searchFilter)
+      mainSearch.current = valeurActuelle
+      // mainSearch.push(searchFilter)
 
       // Mettre à jour les recettes en fonction des filtres sélectionnés
-      recipes = new RecipeManager(searchFilter);
       recipeCards = recipes.createRecipeCards();
-      recipeCardZone.innerHTML = ''; // Afficher les filtres déroulants
+      recipeCardZone.innerHTML = ""; // Afficher les filtres déroulants
       recipeCards.forEach((recipeCard) => {
         recipeCardZone.appendChild(recipeCard);
       });
-
-      dropdownFilter(searchFilter);
-      totalRecipeUpdate(searchFilter)
+      dropdownFilter(recipeList);
+      totalRecipeUpdate(recipeList);
     }
   }
 });
 
 // Affichez les filtres déroulants initiaux
 dropdownFilter(recipes.recipeList);
-mainSearch.push(recipes._data)
-console.log(mainSearch)
+
+function handleDropdownOptionClick(event) {
+  handleFilterItemClick(event);
+  filterRecipes(mainSearch.current, filterList);
+  const recipeList = recipes.recipeFilter(mainSearch.current);
+  recipeCards = recipes.createRecipeCards();
+  recipeCardZone.innerHTML = ""; // Afficher les filtres déroulants
+  recipeCards.forEach((recipeCard) => {
+    recipeCardZone.appendChild(recipeCard);
+  });
+  dropdownFilter(recipeList);
+  totalRecipeUpdate(recipeList);
+}
+
+dropdownIngredients.addEventListener("click", handleDropdownOptionClick);
+dropdownAppliance.addEventListener("click", handleDropdownOptionClick);
+dropdownUstensils.addEventListener("click", handleDropdownOptionClick);
+
+console.log(mainSearch);
