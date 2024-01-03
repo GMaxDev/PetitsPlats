@@ -5,12 +5,12 @@ export class RecipeManager {
     this.recipeList = data
   }
 
-  recipeFilter(filter) {
+  recipeFilter(filter, tagList) {
+    console.log("Filtre tapé : "+filter+"; Liste des tags sélectionné : "+tagList)
     const lowercaseFilter = filter; // Convertit le filtre en minuscule
-
     // Utilise la méthode filter pour créer un nouveau tableau contenant les éléments qui passent le filtre
     const arrayFilterResult = this.recipeList.filter((recipe) => {
-      // Vérifie si le filtre correspond à n'importe quelle propriété de la recette
+      // Vérifie si le filtrce correspond à n'importe quelle propriété de la recette
       return Object.values(recipe).some((value) => {
         let result = false
         if (typeof value === "string") {

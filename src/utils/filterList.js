@@ -1,5 +1,5 @@
 export let filterList = [];
 export const ingredientList = [];
 export const applianceList = [];
-export const ustensilsList = [];
+export const ustensilList = [];
 export let mainSearch = {current:''}

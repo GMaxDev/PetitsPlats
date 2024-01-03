@@ -1,5 +1,5 @@
 import { displayActiveFilter } from "../utils/displayActiveFilter";
-import { filterList, mainSearch } from "../utils/filterList";
+import { filterList, mainSearch, applianceList, ustensilList, ingredientList } from "../utils/filterList";
 import { totalRecipeUpdate } from "../utils/totalRecipeUpdate";
 
 const dropdownIngredients = document.getElementById("ingredientList");
@@ -13,7 +13,7 @@ export function dropdownFilter(data) {
   dropdownAppliance.innerHTML = ''
   dropdownUstensils.innerHTML = ''
   //On purge les filtres actifs
-  filterList.splice(0, filterList.length)
+  // filterList.splice(0, filterList.length)
   displayActiveFilter(filterList)
 
   //On créait des set pour vérifier que chaque élément de la liste est unique
@@ -75,26 +75,33 @@ export function dropdownFilter(data) {
       }
     });
   });
-
-  // -----------------------------------------------
-
-  // Si on clique sur un élément d'un dropdown, on lui modifie son état de focus
-  dropdownIngredients.addEventListener("click", (event) => {
-    handleFilterItemClick(event);
-  });
-  dropdownAppliance.addEventListener("click", (event) => {
-    handleFilterItemClick(event);
-  });
-  dropdownUstensils.addEventListener("click", (event) => {
-    handleFilterItemClick(event);
-  });
 }
 
 // On vérifie l'état de attribut 'filteractive'
 export function handleFilterItemClick(event) {
   const filterActiveValue = event.target.dataset.filteractive;
   const liValue = event.target;
+  
   if (!filterActiveValue && liValue.nodeName === "LI") {
+    const elementClasses = event.target.classList
+  
+    elementClasses.forEach(className => {
+      switch (className) {
+        case 'ingredient':
+          console.log('Cet élément est un ingrédient');
+          ingredientList.push(liValue.innerHTML)
+          break;
+        case 'appliance':
+          console.log('Cet élément est un appareil');
+          applianceList.push(liValue.innerHTML)
+          break;
+        case 'ustensil':
+          console.log('Cet élément est un ustensile');
+          ustensilList.push(liValue.innerHTML)
+          break;
+      }
+    })
+
     const parentList = liValue.parentElement;
   
     const crossIcon = document.createElement("i");
@@ -113,9 +120,13 @@ export function handleFilterItemClick(event) {
     parentList.prepend(liValue); // Place l'élément focus en haut de la liste correspondante
     filterList.push(liValue.innerText); // Ajoute à la liste des filtres
     displayActiveFilter(filterList); // Affiche l'élément dans la zone de filtre globale
-  
-    // filterRecipes(mainSearch[0], filterList);  
   }
+  // ------------------------------
+
+  console.log(ingredientList)
+  console.log(applianceList)
+  console.log(ustensilList)
+
 }
 
 export function filterRecipes(recipes, searchTerms) {

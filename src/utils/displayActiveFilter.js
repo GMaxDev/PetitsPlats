@@ -3,7 +3,7 @@ import { ModelRecipe } from "../models/ModelRecipe";
 import {
   ingredientList,
   applianceList,
-  ustensilsList,
+  ustensilList,
 } from "./filterList";
 
 const recipeInstances = dataRecipes.map(
@@ -66,7 +66,7 @@ function findMatchType(element) {
     // Vérifie les ustensiles
     for (const ustensil of recipe.ustensils) {
       if (ustensil.toLowerCase() === normalizedElement) {
-        ustensilsList.push(element);
+        ustensilList.push(element);
         return "Ustensil";
       }
     }

@@ -53,11 +53,10 @@ inputSearch.addEventListener("keydown", (event) => {
   const valueInput = event.target.value;
   if (event.key === "Enter" && valueInput.length >= 3) {
     event.preventDefault();
-    event.target.value = "";
     const valeurActuelle = valueInput.trim();
     if (valeurActuelle !== "") {
       // Filtrer les recettes en fonction du mot-clé saisi
-      const recipeList = recipes.recipeFilter(valeurActuelle);
+      const recipeList = recipes.recipeFilter(valeurActuelle, filterList);
 
       mainSearch.current = valeurActuelle
       // mainSearch.push(searchFilter)
@@ -80,18 +79,16 @@ dropdownFilter(recipes.recipeList);
 function handleDropdownOptionClick(event) {
   handleFilterItemClick(event);
   filterRecipes(mainSearch.current, filterList);
-  const recipeList = recipes.recipeFilter(mainSearch.current);
+  const recipeList = recipes.recipeFilter(mainSearch.current, filterList);
   recipeCards = recipes.createRecipeCards();
   recipeCardZone.innerHTML = ""; // Afficher les filtres déroulants
   recipeCards.forEach((recipeCard) => {
     recipeCardZone.appendChild(recipeCard);
   });
-  dropdownFilter(recipeList);
+  // dropdownFilter(recipeList);
   totalRecipeUpdate(recipeList);
 }
 
 dropdownIngredients.addEventListener("click", handleDropdownOptionClick);
 dropdownAppliance.addEventListener("click", handleDropdownOptionClick);
 dropdownUstensils.addEventListener("click", handleDropdownOptionClick);
-
-console.log(mainSearch);
