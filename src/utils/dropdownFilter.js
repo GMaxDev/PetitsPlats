@@ -1,6 +1,6 @@
 import { displayActiveFilter } from "../utils/displayActiveFilter";
+import { handleDropdownOptionClick } from "../pages/main";
 import { filterList, mainSearch, applianceList, ustensilList, ingredientList } from "../utils/filterList";
-import { totalRecipeUpdate } from "../utils/totalRecipeUpdate";
 
 const dropdownIngredients = document.getElementById("ingredientList");
 const dropdownAppliance = document.getElementById("applianceList");
@@ -32,8 +32,10 @@ export function dropdownFilter(data) {
         ingredientItemLi.innerHTML = ingredientName;
         ingredientItemLi.setAttribute(
           "class",
-          "pl-4 py-2 cursor-pointer ingredient"
+          "pl-4 py-2 cursor-pointer"
         );
+        ingredientItemLi.setAttribute("data-type", "ingredient");
+
         dropdownIngredients.appendChild(ingredientItemLi);
 
         existingIngredients.add(ingredientName);
@@ -49,8 +51,9 @@ export function dropdownFilter(data) {
       applianceItemLi.innerHTML = applianceName;
       applianceItemLi.setAttribute(
         "class",
-        "pl-4 py-2 cursor-pointer appliance"
+        "pl-4 py-2 cursor-pointer"
       );
+      applianceItemLi.setAttribute("data-type", "appliance");
       dropdownAppliance.appendChild(applianceItemLi);
 
       existingAppliances.add(applianceName);
@@ -67,8 +70,9 @@ export function dropdownFilter(data) {
         ustensilItemLi.innerHTML = ustensilName;
         ustensilItemLi.setAttribute(
           "class",
-          "pl-4 py-2 cursor-pointer ustensil"
+          "pl-4 py-2 cursor-pointer"
         );
+        ustensilItemLi.setAttribute("data-type", "ustensil");
         dropdownUstensils.appendChild(ustensilItemLi);
 
         existingUstensils.add(ustensilName);
@@ -79,14 +83,12 @@ export function dropdownFilter(data) {
 
 // On vérifie l'état de attribut 'filteractive'
 export function handleFilterItemClick(event) {
-  const filterActiveValue = event.target.dataset.filteractive;
-  const liValue = event.target;
-  
-  if (!filterActiveValue && liValue.nodeName === "LI") {
-    const elementClasses = event.target.classList
-  
-    elementClasses.forEach(className => {
-      switch (className) {
+  if(event){
+    const filterActiveValue = event.target.dataset.filteractive;
+    const liValue = event.target;
+
+    if (!filterActiveValue && liValue.nodeName === "LI") {
+      switch (event.target.dataset.type) {
         case 'ingredient':
           console.log('Cet élément est un ingrédient');
           ingredientList.push(liValue.innerHTML)
@@ -100,40 +102,35 @@ export function handleFilterItemClick(event) {
           ustensilList.push(liValue.innerHTML)
           break;
       }
-    })
-
-    const parentList = liValue.parentElement;
   
-    const crossIcon = document.createElement("i");
-    crossIcon.setAttribute("class", "cross cursor-pointer fa-solid fa-xmark");
-    crossIcon.addEventListener("click", () => {
-      deactivateFilter(liValue);
-    });
-  
-    liValue.setAttribute("data-filteractive", "true");
-    liValue.setAttribute(
-      "class",
-      "flex justify-between items-center h-14 text-left rounded-none px-4 py-2 cursor-pointer bg-amber-400 w-full"
-    );
-    liValue.appendChild(crossIcon);
-  
-    parentList.prepend(liValue); // Place l'élément focus en haut de la liste correspondante
-    filterList.push(liValue.innerText); // Ajoute à la liste des filtres
-    displayActiveFilter(filterList); // Affiche l'élément dans la zone de filtre globale
+      const parentList = liValue.parentElement;
+    
+      const crossIcon = document.createElement("i");
+      crossIcon.setAttribute("class", "cross cursor-pointer fa-solid fa-xmark");
+      crossIcon.addEventListener("click", (event) => {
+        deactivateFilter(liValue);
+        handleDropdownOptionClick(event)
+      });
+    
+      liValue.setAttribute("data-filteractive", "true");
+      liValue.setAttribute(
+        "class",
+        "flex justify-between items-center h-14 text-left rounded-none px-4 py-2 cursor-pointer bg-amber-400 w-full"
+      );
+      liValue.appendChild(crossIcon);
+    
+      parentList.prepend(liValue); // Place l'élément focus en haut de la liste correspondante
+      filterList.push(liValue.innerText); // Ajoute à la liste des filtres
+      displayActiveFilter(filterList); // Affiche l'élément dans la zone de filtre globale
+    }
   }
+  
   // ------------------------------
 
   console.log(ingredientList)
   console.log(applianceList)
   console.log(ustensilList)
 
-}
-
-export function filterRecipes(recipes, searchTerms) {
-  let listNewRecipes = document.querySelectorAll('.recipeCard').length;
-
-  console.log('Nombre de recettes correspondantes: ' + listNewRecipes); 
-  totalRecipeUpdate(listNewRecipes)
 }
 
 function deactivateFilter(liValue) {
@@ -146,8 +143,21 @@ function deactivateFilter(liValue) {
     filterList.splice(filterIndex, 1);
   }
 
+  switch (liValue.dataset.type) {
+    case 'ingredient':
+      ingredientList.splice(filterIndex, 1);
+      break;
+    case 'appliance':
+      applianceList.splice(filterIndex, 1);
+      break;
+    case 'ustensil':
+      ustensilList.splice(filterIndex, 1);
+      break;
+  }
+
   // Retire l'élément de l'affichage global des filtres
   displayActiveFilter(filterList);
+  handleDropdownOptionClick();
 
   // Supprime uniquement la croix de l'élément <i>
   const crossIcon = liValue.querySelector(".cross");
@@ -159,7 +169,4 @@ function deactivateFilter(liValue) {
   const parentList = liValue.parentElement;
   parentList.appendChild(liValue);
 
-  // Met à jour les recettes en fonction des filtres
-  filterRecipes(mainSearch.current, filterList);
-  console.log(filterList);
 }

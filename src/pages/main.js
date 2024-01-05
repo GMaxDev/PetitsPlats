@@ -7,7 +7,6 @@ import { totalRecipeUpdate } from "../utils/totalRecipeUpdate";
 import {
   dropdownFilter,
   handleFilterItemClick,
-  filterRecipes,
 } from "../utils/dropdownFilter";
 import { mainSearch, filterList } from "../utils/filterList";
 
@@ -76,16 +75,15 @@ inputSearch.addEventListener("keydown", (event) => {
 // Affichez les filtres déroulants initiaux
 dropdownFilter(recipes.recipeList);
 
-function handleDropdownOptionClick(event) {
+export function handleDropdownOptionClick(event) {
   handleFilterItemClick(event);
-  filterRecipes(mainSearch.current, filterList);
   const recipeList = recipes.recipeFilter(mainSearch.current, filterList);
   recipeCards = recipes.createRecipeCards();
   recipeCardZone.innerHTML = ""; // Afficher les filtres déroulants
   recipeCards.forEach((recipeCard) => {
     recipeCardZone.appendChild(recipeCard);
   });
-  // dropdownFilter(recipeList);
+  // dropdownFilter(recipes.recipeList);
   totalRecipeUpdate(recipeList);
 }
 
