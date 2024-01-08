@@ -40,8 +40,8 @@
       </div>
     </header>
     <main class="flex flex-col justify-between mx-24 my-6" id="mainContainer">
-      <div class="z-10 flex justify-between" id="filterZone">
-        <div class="flex gap-16" id="filterForm">
+      <div class="z-10 flex flex-col items-center justify-between md:flex-row" id="filterZone">
+        <div class="flex flex-wrap justify-center gap-16 sm:justify-normal" id="filterForm">
           <div id="ingredientsFilter" class="drop-shadow">
             <button
               class="items-center px-4 font-medium bg-white rounded-lg listBlocFilter h-14"
@@ -72,7 +72,7 @@
           </div>
           <div id="ustensilsFilter" class="drop-shadow">
             <button
-              class="items-center px-4 font-medium bg-white rounded-lg listBlocFilter h-14"
+              class="items-center px-4 font-medium bg-white rounded-lg listBlocFilter h-14 "
               id="ustensils"
               type="button"
             >
@@ -85,11 +85,11 @@
             </ul>
           </div>
         </div>
-        <h3 id="totalRecipe" class="text-xl"></h3>
+        <h3 id="totalRecipe" class="my-8 text-xl "></h3>
       </div>
       <div class="z-0 flex flex-wrap gap-x-10" id="filterSpecificationZone"></div>
       <div
-        class="relative z-0 grid grid-cols-3 gap-x-12 gap-y-16 mt-7"
+        class="relative z-0 grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 mt-7"
         id="recipeCardZone"
       ></div>
     </main>

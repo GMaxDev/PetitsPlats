@@ -28,18 +28,6 @@ export function displayActiveFilter(data) {
     );
     elementBloc.setAttribute("data-filteractive", "true")
 
-    // elementBloc.querySelector(".cross").addEventListener("click", () => {
-    //   // Retirer l'élément spécifique de filterList
-    //   const indexToRemove = filterList.indexOf(elementBloc);
-    //   if (indexToRemove !== -1) {
-    //     filterList.splice(indexToRemove, 1);
-    //     filterSpecificationZone.removeChild(elementBloc);
-    //   }
-    // });
-
-    // Nouvelle logique pour comparer avec le fichier JSON de recettes
-    // const matchType = findMatchType(element);
-    // console.log(`Correspondance pour ${element} : ${matchType}`);
     filterSpecificationZone.appendChild(elementBloc);
   });
   // Aucune correspondance trouvée

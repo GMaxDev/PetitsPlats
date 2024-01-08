@@ -132,7 +132,7 @@ export class RecipeManager {
         <h4 class="text-xs uppercase text-neutral-500 font-bold">Recette</h4>
         <p class="text-sm my-5 h-20 w-full overflow-hidden text-ellipsis">${this.recipeList[i].description}</p>
         <h4 class="text-xs uppercase text-neutral-500 font-bold">Ingrédients</h4>
-        <div id="recipe_${this.recipeList[i].id}" class="grid grid-cols-2 mt-4 ingredientZone"></div>
+        <div id="recipe_${this.recipeList[i].id}" class="grid sm:grid-cols-2 mt-4 ingredientZone"></div>
       </div>`;
 
       // -----------------------------------------------
