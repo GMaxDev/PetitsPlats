@@ -1,15 +1,11 @@
-import { filterList, ingredientList, applianceList, ustensilList } from "../utils/filterList";
+import { ingredientList, applianceList, ustensilList } from "../utils/filterList";
 export class RecipeManager {
   constructor(data) {
     this._data = data;
     this.recipeList = data;
   }
 
-  recipeFilter(filter, tagList) {
-    console.log(
-      "Filtre tapé : " + filter + "; Liste des tags sélectionné : " + tagList
-    );
-
+  recipeFilter(filter) {
     const arrayFilterResult = this._data.filter((recipe) => {
       const isSearchMatch = Object.values(recipe).some((value) => {
         let result = false;
@@ -25,7 +21,6 @@ export class RecipeManager {
         }
 
         // ----------------------------------------------
-      console.log(result)
         return result
       });
 

@@ -8,7 +8,7 @@ import {
   dropdownFilter,
   handleFilterItemClick,
 } from "../utils/dropdownFilter";
-import { mainSearch, filterList } from "../utils/filterList";
+import { mainSearch, ingredientList, applianceList, ustensilList } from "../utils/filterList";
 
 // Sélectionnez les éléments DOM principaux
 const inputSearch = document.getElementById("search");
@@ -54,8 +54,12 @@ inputSearch.addEventListener("keydown", (event) => {
     event.preventDefault();
     const valeurActuelle = valueInput.trim();
     if (valeurActuelle !== "") {
+      ingredientList.splice(0, ingredientList.length)
+      applianceList.splice(0, applianceList.length)
+      ustensilList.splice(0, ustensilList.length)
+
       // Filtrer les recettes en fonction du mot-clé saisi
-      const recipeList = recipes.recipeFilter(valeurActuelle, filterList);
+      const recipeList = recipes.recipeFilter(valeurActuelle);
 
       mainSearch.current = valeurActuelle
       // mainSearch.push(searchFilter)
@@ -68,6 +72,8 @@ inputSearch.addEventListener("keydown", (event) => {
       });
       dropdownFilter(recipeList);
       totalRecipeUpdate(recipeList);
+      document.getElementById('filterSpecificationZone').innerText = ''
+
     }
   }
 });
@@ -77,7 +83,7 @@ dropdownFilter(recipes.recipeList);
 
 export function handleDropdownOptionClick(event) {
   handleFilterItemClick(event);
-  const recipeList = recipes.recipeFilter(mainSearch.current, filterList);
+  const recipeList = recipes.recipeFilter(mainSearch.current);
   recipeCards = recipes.createRecipeCards();
   recipeCardZone.innerHTML = ""; // Afficher les filtres déroulants
   recipeCards.forEach((recipeCard) => {

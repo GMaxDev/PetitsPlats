@@ -1,6 +1,6 @@
 import { displayActiveFilter } from "../utils/displayActiveFilter";
 import { handleDropdownOptionClick } from "../pages/main";
-import { filterList, mainSearch, applianceList, ustensilList, ingredientList } from "../utils/filterList";
+import { filterList, applianceList, ustensilList, ingredientList } from "../utils/filterList";
 
 const dropdownIngredients = document.getElementById("ingredientList");
 const dropdownAppliance = document.getElementById("applianceList");
@@ -108,7 +108,7 @@ export function handleFilterItemClick(event) {
       const crossIcon = document.createElement("i");
       crossIcon.setAttribute("class", "cross cursor-pointer fa-solid fa-xmark");
       crossIcon.addEventListener("click", (event) => {
-        deactivateFilter(liValue);
+        desactivateFilter(liValue);
         handleDropdownOptionClick(event)
       });
     
@@ -118,10 +118,24 @@ export function handleFilterItemClick(event) {
         "flex justify-between items-center h-14 text-left rounded-none px-4 py-2 cursor-pointer bg-amber-400 w-full"
       );
       liValue.appendChild(crossIcon);
-    
+
+      
       parentList.prepend(liValue); // Place l'élément focus en haut de la liste correspondante
       filterList.push(liValue.innerText); // Ajoute à la liste des filtres
       displayActiveFilter(filterList); // Affiche l'élément dans la zone de filtre globale
+
+      const correspondingElement = document.getElementById(liValue.innerText);
+      if (correspondingElement) {
+        // Créer une nouvelle instance de la croix et l'ajouter à l'élément correspondant
+        const newCrossIcon = document.createElement("i");
+        newCrossIcon.setAttribute("class", "cross cursor-pointer fa-solid fa-xmark");
+        newCrossIcon.addEventListener("click", (event) => {
+          desactivateFilter(liValue);
+          handleDropdownOptionClick(event);
+        });
+
+        correspondingElement.appendChild(newCrossIcon);
+      }
     }
   }
   
@@ -133,7 +147,7 @@ export function handleFilterItemClick(event) {
 
 }
 
-function deactivateFilter(liValue) {
+export function desactivateFilter(liValue) {
   liValue.removeAttribute("data-filteractive");
   liValue.setAttribute("class", "pl-4 py-2 cursor-pointer"); // Remet le design initial
 
@@ -145,13 +159,13 @@ function deactivateFilter(liValue) {
 
   switch (liValue.dataset.type) {
     case 'ingredient':
-      ingredientList.splice(filterIndex, 1);
+      ingredientList.splice(ingredientList.indexOf(liValue.innerText), 1);
       break;
     case 'appliance':
-      applianceList.splice(filterIndex, 1);
+      applianceList.splice(applianceList.indexOf(liValue.innerText), 1);
       break;
     case 'ustensil':
-      ustensilList.splice(filterIndex, 1);
+      ustensilList.splice(ustensilList.indexOf(liValue.innerText), 1);
       break;
   }
 
@@ -166,7 +180,8 @@ function deactivateFilter(liValue) {
   }
 
   // Déplace l'élément à la fin de la liste des éléments sélectionnés
-  const parentList = liValue.parentElement;
-  parentList.appendChild(liValue);
+  if (liValue.parentElement){
+    liValue.parentElement.appendChild(liValue);
+  }
 
 }
