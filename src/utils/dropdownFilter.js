@@ -140,7 +140,8 @@ export function desactivateFilter(liValue) {
     const valueType = liValue.dataset.type + 'List'
     const liLength = document.getElementById(valueType).getElementsByTagName('li').length
     for(let i=0; i<liLength; i++){
-      if(liValue.innerText === document.getElementById(valueType).childNodes[i].innerText){
+      const liInnerText = document.getElementById(valueType).childNodes[i].innerText
+      if(liValue.innerText === liInnerText){
         const liDrop = document.getElementById(valueType).childNodes[i]
         liDrop.removeAttribute("data-filteractive")
         liDrop.setAttribute("class", "pl-4 py-2 cursor-pointer");
