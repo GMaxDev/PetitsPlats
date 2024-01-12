@@ -4,7 +4,7 @@ import { filterList, applianceList, ustensilList, ingredientList } from "../util
 
 const dropdownIngredients = document.getElementById("ingredientList");
 const dropdownAppliance = document.getElementById("applianceList");
-const dropdownUstensils = document.getElementById("ustensilsList");
+const dropdownUstensils = document.getElementById("ustensilList");
 
 // Ajoute des tableaux dans des listes de filtres
 export function dropdownFilter(data) {
@@ -121,21 +121,9 @@ export function handleFilterItemClick(event) {
 
       
       parentList.prepend(liValue); // Place l'élément focus en haut de la liste correspondante
-      filterList.push(liValue.innerText); // Ajoute à la liste des filtres
+      filterList.push({ text: liValue.innerText, type: liValue.dataset.type });
+ // Ajoute à la liste des filtres
       displayActiveFilter(filterList); // Affiche l'élément dans la zone de filtre globale
-
-      const correspondingElement = document.getElementById(liValue.innerText);
-      if (correspondingElement) {
-        // Créer une nouvelle instance de la croix et l'ajouter à l'élément correspondant
-        const newCrossIcon = document.createElement("i");
-        newCrossIcon.setAttribute("class", "cross cursor-pointer fa-solid fa-xmark");
-        newCrossIcon.addEventListener("click", (event) => {
-          desactivateFilter(liValue);
-          handleDropdownOptionClick(event);
-        });
-
-        correspondingElement.appendChild(newCrossIcon);
-      }
     }
   }
   
@@ -148,11 +136,30 @@ export function handleFilterItemClick(event) {
 }
 
 export function desactivateFilter(liValue) {
+  if(liValue.nodeName === 'P'){
+    const valueType = liValue.dataset.type + 'List'
+    const liLength = document.getElementById(valueType).getElementsByTagName('li').length
+    for(let i=0; i<liLength; i++){
+      if(liValue.innerText === document.getElementById(valueType).childNodes[i].innerText){
+        const liDrop = document.getElementById(valueType).childNodes[i]
+        liDrop.removeAttribute("data-filteractive")
+        liDrop.setAttribute("class", "pl-4 py-2 cursor-pointer");
+
+        const crossIcon = liDrop.querySelector(".cross");
+        if (crossIcon) {
+          crossIcon.remove();
+        }
+        if (liDrop.parentElement){
+          liDrop.parentElement.appendChild(liDrop);
+        }
+      }
+    }
+  }
   liValue.removeAttribute("data-filteractive");
   liValue.setAttribute("class", "pl-4 py-2 cursor-pointer"); // Remet le design initial
 
   // Retire l'élément de la liste des filtres
-  const filterIndex = filterList.indexOf(liValue.innerText);
+  const filterIndex = filterList.findIndex(item => item.text === liValue.innerText);
   if (filterIndex !== -1) {
     filterList.splice(filterIndex, 1);
   }
@@ -183,5 +190,4 @@ export function desactivateFilter(liValue) {
   if (liValue.parentElement){
     liValue.parentElement.appendChild(liValue);
   }
-
 }

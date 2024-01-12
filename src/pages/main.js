@@ -19,7 +19,7 @@ const recipeCardZone = document.getElementById("recipeCardZone");
 
 const dropdownIngredients = document.getElementById("ingredientList");
 const dropdownAppliance = document.getElementById("applianceList");
-const dropdownUstensils = document.getElementById("ustensilsList");
+const dropdownUstensils = document.getElementById("ustensilList");
 
 // Créez une instance de RecipeManager
 let recipes = new RecipeManager(dataRecipes);
@@ -32,7 +32,7 @@ applianceFilterButton.addEventListener("click", () => {
   toggleButtonFilter("appliance");
 });
 ustensilsFilterButton.addEventListener("click", () => {
-  toggleButtonFilter("ustensils");
+  toggleButtonFilter("ustensil");
 });
 
 // Créez et affichez les cartes de recette initiales
