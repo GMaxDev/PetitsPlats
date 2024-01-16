@@ -58,7 +58,7 @@ export class RecipeManager {
             ustensilSearch = true;
             break; // Sort de la boucle dès qu'une condition est pas remplie
           } else {
-            applianceSearch = false
+            ustensilSearch = false
           }
         }
         // Si une condition n'est pas remplie, sort de la boucle principale
