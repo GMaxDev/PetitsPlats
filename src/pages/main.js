@@ -48,10 +48,10 @@ recipeCards.forEach((recipeCard) => {
 totalRecipeUpdate(recipeCards);
 
 // Ajoutez un écouteur d'événements pour la recherche par mot-clé
-inputSearch.addEventListener("keydown", (event) => {
+inputSearch.addEventListener("input", (event) => {
   const valueInput = event.target.value;
-  if (event.key === "Enter" && valueInput.length >= 3) {
-    event.preventDefault();
+  if (valueInput.length >= 3) {
+    // event.preventDefault();
     const valeurActuelle = valueInput.trim();
     if (valeurActuelle !== "") {
       ingredientList.splice(0, ingredientList.length)
