@@ -25,47 +25,47 @@ export class RecipeManager {
       });
 
       let ingredientSearch = true; // Initialise à true par défaut
-      for (const selectedIngredient of ingredientList) {
-        for (const recipeIngredient of recipe.ingredients) {
+      ingredientList.forEach(selectedIngredient => {
+        recipe.ingredients.forEach(recipeIngredient => {
           // Si la condition n'est pas remplie, passe ingredientSearch à false
           if (recipeIngredient.ingredient.toLowerCase().includes(selectedIngredient.toLowerCase())) {
             ingredientSearch = true;
-            break
+            return
           } else {
             ingredientSearch = false
           }
-        }
+        })
         // Si une condition n'est pas remplie, sort de la boucle principale
         if (!ingredientSearch) {
-          break;
+          return;
         }
-      }
+      })
 
       let applianceSearch = true; // Initialise à true par défaut
-      for (const selectedAppliance of applianceList) {
+      applianceList.forEach(selectedAppliance => {
         // Si la condition n'est pas remplie, passe applianceSearch à false
         if (!(recipe.appliance.toLowerCase() === selectedAppliance.toLowerCase())) {
           applianceSearch = false;
-          break; // Sort de la boucle dès qu'une condition n'est pas remplie
+          return; // Sort de la boucle dès qu'une condition n'est pas remplie
         }
-      }
+      })
 
       let ustensilSearch = true; // Initialise à true par défaut
-      for (const selectedUstensil of ustensilList) {
-        for (const recipeUstensil of recipe.ustensils) {
+      ustensilList.forEach(selectedUstensil => {
+        recipe.ustensils.forEach(recipeUstensil => {
           // Si la condition n'est pas remplie, passe ustensilSearch à false
           if (recipeUstensil.toLowerCase().includes(selectedUstensil.toLowerCase())) {
             ustensilSearch = true;
-            break; // Sort de la boucle dès qu'une condition est pas remplie
+            return; // Sort de la boucle dès qu'une condition est pas remplie
           } else {
             ustensilSearch = false
           }
-        }
+        })
         // Si une condition n'est pas remplie, sort de la boucle principale
         if (!ustensilSearch) {
-          break;
+          return;
         }
-      }
+      })
       
       return isSearchMatch && ingredientSearch && applianceSearch && ustensilSearch
     })
