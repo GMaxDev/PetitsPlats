@@ -22,6 +22,7 @@ const dropdownAppliance = document.getElementById("applianceList");
 const dropdownUstensils = document.getElementById("ustensilList");
 
 // Créez une instance de RecipeManager
+let baseRecipes = new RecipeManager(dataRecipes);
 let recipes = new RecipeManager(dataRecipes);
 
 // Ajoutez des écouteurs d'événements pour les boutons de filtre
@@ -62,7 +63,6 @@ inputSearch.addEventListener("input", (event) => {
       const recipeList = recipes.recipeFilter(valeurActuelle);
 
       mainSearch.current = valeurActuelle
-      // mainSearch.push(searchFilter)
 
       // Mettre à jour les recettes en fonction des filtres sélectionnés
       recipeCards = recipes.createRecipeCards();
@@ -73,8 +73,14 @@ inputSearch.addEventListener("input", (event) => {
       dropdownFilter(recipeList);
       totalRecipeUpdate(recipeList);
       document.getElementById('filterSpecificationZone').innerText = ''
-
     }
+  } else if (valueInput.length < 3){
+    let baseRecipeCards = baseRecipes.createRecipeCards()
+    recipeCardZone.innerHTML = "";
+    baseRecipeCards.forEach((recipeCard) => {
+      recipeCardZone.appendChild(recipeCard);
+    });
+    totalRecipeUpdate(dataRecipes);
   }
 });
 
@@ -89,7 +95,7 @@ export function handleDropdownOptionClick(event) {
   recipeCards.forEach((recipeCard) => {
     recipeCardZone.appendChild(recipeCard);
   });
-  // dropdownFilter(recipes.recipeList);
+  dropdownFilter(recipeList);
   totalRecipeUpdate(recipeList);
 }
 

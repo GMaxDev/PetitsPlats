@@ -40,8 +40,14 @@
       </div>
     </header>
     <main class="flex flex-col justify-between mx-24 my-6" id="mainContainer">
-      <div class="z-10 flex flex-col items-center justify-between md:flex-row" id="filterZone">
-        <div class="flex flex-wrap justify-center gap-16 sm:justify-normal" id="filterForm">
+      <div
+        class="z-10 flex flex-col items-center justify-between md:flex-row"
+        id="filterZone"
+      >
+        <div
+          class="flex flex-wrap justify-center gap-16 sm:justify-normal"
+          id="filterForm"
+        >
           <div id="ingredientsFilter" class="z-30 drop-shadow">
             <button
               class="items-center px-4 font-medium bg-white rounded-lg listBlocFilter h-14"
@@ -50,11 +56,20 @@
             >
               Ingrédients <i class="fa-solid fa-chevron-down"></i>
             </button>
-            <ul
-              id="ingredientList"
-              class="invisible w-0 h-0"
-            >
-            </ul>
+            <div class="invisible w-0 h-0" id="ingredientSearch">
+              <input
+                type="search"
+                name="search"
+                class="w-full pl-2 pr-5 border-2 rounded-sm text-neutral-500 h-9"
+              />
+              <span
+                class="absolute inline-block p-2 right-3 bottom-1.5 bg-trueGray-900 text-neutral-500"
+              >
+                <i class="fas fa-search"></i>
+              </span>
+            </div>
+            <div id="ingredientFilterActive"></div>
+            <ul id="ingredientList" class="invisible w-0 h-0"></ul>
           </div>
           <div id="applianceFilter" class="z-20 drop-shadow">
             <button
@@ -64,30 +79,50 @@
             >
               Appareils <i class="fa-solid fa-chevron-down"></i>
             </button>
-            <ul
-              id="applianceList"
-              class="invisible w-0 h-0"
-            >
-            </ul>
+            <div class="invisible w-0 h-0" id="applianceSearch">
+              <input
+                type="search"
+                name="search"
+                class="w-full pl-2 pr-5 border-2 rounded-sm text-neutral-500 h-9"
+              />
+              <span
+                class="absolute inline-block p-2 right-3 bottom-1.5 bg-trueGray-900 text-neutral-500"
+              >
+                <i class="fas fa-search"></i>
+              </span>
+            </div>
+            <ul id="applianceList" class="invisible w-0 h-0"></ul>
           </div>
           <div id="ustensilsFilter" class="drop-shadow">
             <button
-              class="items-center px-4 font-medium bg-white rounded-lg listBlocFilter h-14 "
+              class="items-center px-4 font-medium bg-white rounded-lg listBlocFilter h-14"
               id="ustensils"
               type="button"
             >
               Ustensiles <i class="fa-solid fa-chevron-down"></i>
             </button>
-            <ul
-              id="ustensilList"
-              class="invisible w-0 h-0"
-            >
-            </ul>
+            <!-- <div class="invisible w-0 h-0" id="ustensilSearch"> -->
+            <div class="invisible w-0 h-0" id="ustensilSearch">
+              <input
+                type="search"
+                name="search"
+                class="w-full pl-2 pr-5 border-2 rounded-sm text-neutral-500 h-9"
+              />
+              <span
+                class="absolute inline-block p-2 right-3 bottom-1.5 bg-trueGray-900 text-neutral-500"
+              >
+                <i class="fas fa-search"></i>
+              </span>
+            </div>
+            <ul id="ustensilList" class="invisible w-0 h-0"></ul>
           </div>
         </div>
-        <h3 id="totalRecipe" class="my-8 text-xl "></h3>
+        <h3 id="totalRecipe" class="my-8 text-xl"></h3>
       </div>
-      <div class="z-0 flex flex-wrap gap-x-10" id="filterSpecificationZone"></div>
+      <div
+        class="z-0 flex flex-wrap gap-x-10"
+        id="filterSpecificationZone"
+      ></div>
       <div
         class="relative z-0 grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 mt-7"
         id="recipeCardZone"
