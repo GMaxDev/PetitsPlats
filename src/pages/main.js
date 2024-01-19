@@ -95,6 +95,7 @@ export function handleDropdownOptionClick(event) {
   recipeCards.forEach((recipeCard) => {
     recipeCardZone.appendChild(recipeCard);
   });
+  
   dropdownFilter(recipeList);
   totalRecipeUpdate(recipeList);
 }

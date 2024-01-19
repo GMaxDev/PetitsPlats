@@ -115,7 +115,7 @@ export function handleFilterItemClick(event) {
       liValue.setAttribute("data-filteractive", "true");
       liValue.setAttribute(
         "class",
-        "flex justify-between items-center h-14 text-left rounded-none px-4 py-2 cursor-pointer bg-amber-400 w-full"
+        "flex justify-between items-center h-11 text-left rounded-none px-4 py-2 cursor-pointer bg-amber-400 w-full"
       );
       liValue.appendChild(crossIcon);
 

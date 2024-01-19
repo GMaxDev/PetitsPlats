@@ -24,49 +24,37 @@ export class RecipeManager {
         return result
       });
 
-      let ingredientSearch = true; // Initialise à true par défaut
-      ingredientList.forEach(selectedIngredient => {
-        recipe.ingredients.forEach(recipeIngredient => {
-          // Si la condition n'est pas remplie, passe ingredientSearch à false
-          if (recipeIngredient.ingredient.toLowerCase().includes(selectedIngredient.toLowerCase())) {
-            ingredientSearch = true;
-            return
-          } else {
-            ingredientSearch = false
-          }
-        })
-        // Si une condition n'est pas remplie, sort de la boucle principale
-        if (!ingredientSearch) {
-          return;
-        }
-      })
-
-      let applianceSearch = true; // Initialise à true par défaut
-      applianceList.forEach(selectedAppliance => {
-        // Si la condition n'est pas remplie, passe applianceSearch à false
-        if (!(recipe.appliance.toLowerCase() === selectedAppliance.toLowerCase())) {
-          applianceSearch = false;
-          return; // Sort de la boucle dès qu'une condition n'est pas remplie
-        }
-      })
-
-      let ustensilSearch = true; // Initialise à true par défaut
-      ustensilList.forEach(selectedUstensil => {
-        recipe.ustensils.forEach(recipeUstensil => {
-          // Si la condition n'est pas remplie, passe ustensilSearch à false
-          if (recipeUstensil.toLowerCase().includes(selectedUstensil.toLowerCase())) {
-            ustensilSearch = true;
-            return; // Sort de la boucle dès qu'une condition est pas remplie
-          } else {
-            ustensilSearch = false
-          }
-        })
-        // Si une condition n'est pas remplie, sort de la boucle principale
-        if (!ustensilSearch) {
-          return;
-        }
-      })
+      let ingredientSearch = ingredientList.every(selectedIngredient =>
+        recipe.ingredients.some(recipeIngredient =>
+          recipeIngredient.ingredient.toLowerCase().includes(selectedIngredient.toLowerCase())
+        )
+      );
       
+      // Si ingredientSearch est faux, cela signifie qu'une condition n'est pas remplie
+      if (!ingredientSearch) {
+        // Sortez ou effectuez l'action appropriée ici
+      }
+      
+      let applianceSearch = applianceList.every(selectedAppliance =>
+        recipe.appliance.toLowerCase() === selectedAppliance.toLowerCase()
+      );
+      
+      // Si applianceSearch est faux, cela signifie qu'une condition n'est pas remplie
+      if (!applianceSearch) {
+        // Sortez ou effectuez l'action appropriée ici
+      }
+      
+      let ustensilSearch = ustensilList.every(selectedUstensil =>
+        recipe.ustensils.some(recipeUstensil =>
+          recipeUstensil.toLowerCase().includes(selectedUstensil.toLowerCase())
+        )
+      );
+      
+      // Si ustensilSearch est faux, cela signifie qu'une condition n'est pas remplie
+      if (!ustensilSearch) {
+        // Sortez ou effectuez l'action appropriée ici
+      }
+
       return isSearchMatch && ingredientSearch && applianceSearch && ustensilSearch
     })
     // ----------------------------------------------
