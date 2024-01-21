@@ -108,6 +108,67 @@ export function dropdownFilter(data) {
       }
     });
   });
+
+  // ------------------------------------------
+
+  const  ingredientSearchInput = document.getElementById('ingredientSearchInput')
+  const ingredientListDisplay = document.getElementById('ingredientList')
+  const  applianceSearchInput = document.getElementById('applianceSearchInput')
+  const applianceListDisplay = document.getElementById('applianceList')
+  const  ustensilSearchInput = document.getElementById('ustensilSearchInput')
+  const ustensilListDisplay = document.getElementById('ustensilList')
+
+  ingredientSearchInput.addEventListener('input', (event) => {
+    const valueIngredientSearchInput = event.target.value.toLowerCase();
+    const ingredientList = ingredientListDisplay.querySelectorAll('li');
+  
+    for (let i = 0; i < ingredientList.length; i++) {
+      const listItemText = ingredientList[i].textContent.toLowerCase();
+      
+      // Vérifier si le texte de l'élément contient le terme de recherche
+      if (listItemText.includes(valueIngredientSearchInput)) {
+        ingredientList[i].style.display = 'block';
+      } else {
+        ingredientList[i].style.display = 'none';
+      }
+    }
+  })
+
+  // ------
+
+  applianceSearchInput.addEventListener('input', (event) => {
+    const valueApplianceSearchInput = event.target.value.toLowerCase();
+    const applianceList = applianceListDisplay.querySelectorAll('li');
+  
+    for (let i = 0; i < applianceList.length; i++) {
+      const listItemText = applianceList[i].textContent.toLowerCase();
+  
+      // Vérifier si le texte de l'élément contient le terme de recherche
+      if (listItemText.includes(valueApplianceSearchInput)) {
+        applianceList[i].style.display = 'block';
+      } else {
+        applianceList[i].style.display = 'none';
+      }
+    }
+  });
+  
+  // ------
+  
+  ustensilSearchInput.addEventListener('input', (event) => {
+    const valueUstensilSearchInput = event.target.value.toLowerCase();
+    const ustensilList = ustensilListDisplay.querySelectorAll('li');
+  
+    for (let i = 0; i < ustensilList.length; i++) {
+      const listItemText = ustensilList[i].textContent.toLowerCase();
+  
+      // Vérifier si le texte de l'élément contient le terme de recherche
+      if (listItemText.includes(valueUstensilSearchInput)) {
+        ustensilList[i].style.display = 'block';
+      } else {
+        ustensilList[i].style.display = 'none';
+      }
+    }
+  });
 }
 
 // On vérifie l'état de attribut 'filteractive'

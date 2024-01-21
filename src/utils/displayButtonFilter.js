@@ -11,7 +11,7 @@ export function toggleButtonFilter(filterName) {
 }
 
 function displaybuttonFilter(filterName) {
-  const searchName = filterName + "Search";
+  const searchName = filterName + "SearchZone";
   const searchFilter = document.getElementById(searchName);
   const activeName = filterName + "FilterActive";
   const activeFilter= document.getElementById(activeName);
@@ -27,7 +27,7 @@ function displaybuttonFilter(filterName) {
 }
 
 function closebuttonFilter(filterName) {
-  const searchName = filterName + "Search";
+  const searchName = filterName + "SearchZone";
   const searchFilter = document.getElementById(searchName);
   const activeName = filterName + "FilterActive";
   const activeFilter= document.getElementById(activeName);
