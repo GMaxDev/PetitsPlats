@@ -21,10 +21,18 @@ export function dropdownFilter(data) {
     (li) => li.getAttribute("data-filteractive") === "true"
   );
 
-  // On nettoie le contenu des dropdowns
+  // On nettoie le contenu des dropdowns et des inputsearch
   dropdownIngredients.innerHTML = '';
   dropdownAppliance.innerHTML = '';
   dropdownUstensils.innerHTML = '';
+  
+  const  ingredientSearchInput = document.getElementById('ingredientSearchInput')
+  const  applianceSearchInput = document.getElementById('applianceSearchInput')
+  const  ustensilSearchInput = document.getElementById('ustensilSearchInput')
+
+  ingredientSearchInput.value = ''
+  applianceSearchInput.value = ''
+  ustensilSearchInput.value = ''
 
   // On réinsère les éléments actifs
   activeIngredients.forEach((li) => dropdownIngredients.appendChild(li));
@@ -111,11 +119,8 @@ export function dropdownFilter(data) {
 
   // ------------------------------------------
 
-  const  ingredientSearchInput = document.getElementById('ingredientSearchInput')
   const ingredientListDisplay = document.getElementById('ingredientList')
-  const  applianceSearchInput = document.getElementById('applianceSearchInput')
   const applianceListDisplay = document.getElementById('applianceList')
-  const  ustensilSearchInput = document.getElementById('ustensilSearchInput')
   const ustensilListDisplay = document.getElementById('ustensilList')
 
   ingredientSearchInput.addEventListener('input', (event) => {
@@ -127,7 +132,7 @@ export function dropdownFilter(data) {
       
       // Vérifier si le texte de l'élément contient le terme de recherche
       if (listItemText.includes(valueIngredientSearchInput)) {
-        ingredientList[i].style.display = 'block';
+        ingredientList[i].style.display = 'flex';
       } else {
         ingredientList[i].style.display = 'none';
       }
@@ -145,7 +150,7 @@ export function dropdownFilter(data) {
   
       // Vérifier si le texte de l'élément contient le terme de recherche
       if (listItemText.includes(valueApplianceSearchInput)) {
-        applianceList[i].style.display = 'block';
+        applianceList[i].style.display = 'flex';
       } else {
         applianceList[i].style.display = 'none';
       }
@@ -163,7 +168,7 @@ export function dropdownFilter(data) {
   
       // Vérifier si le texte de l'élément contient le terme de recherche
       if (listItemText.includes(valueUstensilSearchInput)) {
-        ustensilList[i].style.display = 'block';
+        ustensilList[i].style.display = 'flex';
       } else {
         ustensilList[i].style.display = 'none';
       }
