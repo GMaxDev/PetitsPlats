@@ -8,12 +8,30 @@ const dropdownUstensils = document.getElementById("ustensilList");
 
 // Ajoute des tableaux dans des listes de filtres
 export function dropdownFilter(data) {
-  //On nettoie le contenu des dropdowns
-  dropdownIngredients.innerHTML = ''
-  dropdownAppliance.innerHTML = ''
-  dropdownUstensils.innerHTML = ''
-  //On purge les filtres actifs
-  // filterList.splice(0, filterList.length)
+  // On stocke les éléments à conserver
+  const activeIngredients = Array.from(dropdownIngredients.children).filter(
+    (li) => li.getAttribute("data-filteractive") === "true"
+  );
+
+  const activeAppliances = Array.from(dropdownAppliance.children).filter(
+    (li) => li.getAttribute("data-filteractive") === "true"
+  );
+
+  const activeUstensils = Array.from(dropdownUstensils.children).filter(
+    (li) => li.getAttribute("data-filteractive") === "true"
+  );
+
+  // On nettoie le contenu des dropdowns
+  dropdownIngredients.innerHTML = '';
+  dropdownAppliance.innerHTML = '';
+  dropdownUstensils.innerHTML = '';
+
+  // On réinsère les éléments actifs
+  activeIngredients.forEach((li) => dropdownIngredients.appendChild(li));
+  activeAppliances.forEach((li) => dropdownAppliance.appendChild(li));
+  activeUstensils.forEach((li) => dropdownUstensils.appendChild(li));
+
+  //On met à jour les filtres actifs
   displayActiveFilter(filterList)
 
   //On créait des set pour vérifier que chaque élément de la liste est unique
@@ -21,13 +39,18 @@ export function dropdownFilter(data) {
   const existingAppliances = new Set();
   const existingUstensils = new Set();
 
+// -------------------------------------------------
+
   data.forEach((element) => {
-    // En fonction des du type de l'élément, on l'ajoute au dropdown correspondant
+    // En fonction du type de l'élément, on l'ajoute au dropdown correspondant
 
     element.ingredients.forEach((ingredientArray) => {
       const ingredientName = ingredientArray.ingredient;
+      const isIngredientActive = activeIngredients.some(
+        (li) => li.textContent.trim() === ingredientName
+      );
       // Vérifier si l'ingrédient n'a pas déjà été ajouté
-      if (!existingIngredients.has(ingredientName)) {
+      if (!existingIngredients.has(ingredientName) && !isIngredientActive) {
         const ingredientItemLi = document.createElement("li");
         ingredientItemLi.innerHTML = ingredientName;
         ingredientItemLi.setAttribute(
@@ -45,8 +68,11 @@ export function dropdownFilter(data) {
     // --------------
 
     const applianceName = element.appliance;
+    const isApplianceActive = activeAppliances.some(
+      (li) => li.textContent.trim() === applianceName
+    );
     // Vérifier si l'appareil n'a pas déjà été ajouté
-    if (!existingAppliances.has(applianceName)) {
+    if (!existingAppliances.has(applianceName) && !isApplianceActive) {
       const applianceItemLi = document.createElement("li");
       applianceItemLi.innerHTML = applianceName;
       applianceItemLi.setAttribute(
@@ -63,9 +89,12 @@ export function dropdownFilter(data) {
 
     element.ustensils.forEach((ustensilArray) => {
       const ustensilName = ustensilArray;
+      const isUstensilActive = activeUstensils.some(
+        (li) => li.textContent.trim() === ustensilName
+      );
 
       // Vérifier si l'ustensile n'a pas déjà été ajouté
-      if (!existingUstensils.has(ustensilName)) {
+      if (!existingUstensils.has(ustensilName) && !isUstensilActive) {
         const ustensilItemLi = document.createElement("li");
         ustensilItemLi.innerHTML = ustensilName;
         ustensilItemLi.setAttribute(

@@ -11,24 +11,30 @@ export function toggleButtonFilter(filterName) {
 }
 
 function displaybuttonFilter(filterName) {
-  const buttonName = filterName + "List";
-  const buttonFilter = document.getElementById(buttonName);
   const searchName = filterName + "Search";
   const searchFilter = document.getElementById(searchName);
+  const activeName = filterName + "FilterActive";
+  const activeFilter= document.getElementById(activeName);
+  const buttonName = filterName + "List";
+  const buttonFilter = document.getElementById(buttonName);
 
+  searchFilter.setAttribute("class", "relative z-10 px-3 py-2 bg-white w-44");
+  activeFilter.setAttribute('class', ' z-10 h-auto')
   buttonFilter.setAttribute(
     "class",
-    "top-24 visible list-none absolute flex flex-col rounded-b-lg items-start overflow-auto listBlocFilter max-h-80 z-1"
+    "absolute top-28 visible list-none flex flex-col rounded-b-lg items-start overflow-auto listBlocFilter max-h-80 z-10"
   );
-  searchFilter.setAttribute("class", "top-12 absolute px-3 py-2 bg-white w-44");
 }
 
 function closebuttonFilter(filterName) {
-  const buttonName = filterName + "List";
-  const buttonFilter = document.getElementById(buttonName);
   const searchName = filterName + "Search";
   const searchFilter = document.getElementById(searchName);
+  const activeName = filterName + "FilterActive";
+  const activeFilter= document.getElementById(activeName);
+  const buttonName = filterName + "List";
+  const buttonFilter = document.getElementById(buttonName);
 
   buttonFilter.setAttribute("class", "invisible w-0 h-0");
   searchFilter.setAttribute("class", "invisible w-0 h-0");
+  activeFilter.setAttribute("class", "invisible w-0 h-0");
 }
