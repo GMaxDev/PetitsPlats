@@ -12,9 +12,9 @@ import { mainSearch, ingredientList, applianceList, ustensilList } from "../util
 
 // Sélectionnez les éléments DOM principaux
 const inputSearch = document.getElementById("search");
-const ingredientsFilterButton = document.getElementById("ingredients");
+const ingredientsFilterButton = document.getElementById("ingredient");
 const applianceFilterButton = document.getElementById("appliance");
-const ustensilsFilterButton = document.getElementById("ustensils");
+const ustensilsFilterButton = document.getElementById("ustensil");
 const recipeCardZone = document.getElementById("recipeCardZone");
 
 const dropdownIngredients = document.getElementById("ingredientList");

@@ -27,13 +27,8 @@ function displaybuttonFilter(filterName) {
     "absolute top-28 visible list-none flex flex-col rounded-b-lg items-start overflow-auto listBlocFilter max-h-80 z-10"
   );
 
-  const ingredients = document.getElementById('ingredients')
-  const appliance = document.getElementById('appliance')
-  const ustensils = document.getElementById('ustensils')
-
-  ingredients.classList.replace('rounded-lg', 'rounded-t-lg')
-  appliance.classList.replace('rounded-lg', 'rounded-t-lg')
-  ustensils.classList.replace('rounded-lg', 'rounded-t-lg')
+  const button = document.getElementById(filterName)
+  button.classList.replace('rounded-lg', 'rounded-t-lg')
 }
 
 function closebuttonFilter(filterName) {
@@ -48,11 +43,6 @@ function closebuttonFilter(filterName) {
   searchFilter.setAttribute("class", "invisible w-0 h-0");
   activeFilter.setAttribute("class", "invisible w-0 h-0");
 
-  const ingredients = document.getElementById('ingredients')
-  const appliance = document.getElementById('appliance')
-  const ustensils = document.getElementById('ustensils')
-
-  ingredients.classList.replace('rounded-t-lg', 'rounded-lg')
-  appliance.classList.replace('rounded-t-lg', 'rounded-lg')
-  ustensils.classList.replace('rounded-t-lg', 'rounded-lg')
+  const button = document.getElementById(filterName)
+  button.classList.replace('rounded-t-lg', 'rounded-lg')
 }
