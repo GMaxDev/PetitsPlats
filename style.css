@@ -63,5 +63,5 @@ header #tagline {
 }
 
 .listBlocFilter::-webkit-scrollbar {
-  width: 0;  /* Largeur de la barre de défilement à 0 pour la masquer */
+  width: 0; /* Largeur de la barre de défilement à 0 pour la masquer */
 }
