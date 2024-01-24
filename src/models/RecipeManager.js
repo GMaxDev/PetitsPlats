@@ -1,4 +1,8 @@
-import { ingredientList, applianceList, ustensilList } from "../utils/filterList";
+import {
+  ingredientList,
+  applianceList,
+  ustensilList,
+} from "../utils/filterList";
 export class RecipeManager {
   constructor(data) {
     this._data = data;
@@ -16,47 +20,38 @@ export class RecipeManager {
           // Si la propriété est un tableau, vérifie si l'un des éléments du tableau contient le filtre
           result = value.some(
             (item) =>
-              typeof item === "string" && item.toLowerCase().includes(filter.toLowerCase())
+              typeof item === "string" &&
+              item.toLowerCase().includes(filter.toLowerCase())
           );
         }
 
         // ----------------------------------------------
-        return result
+        return result;
       });
 
-      let ingredientSearch = ingredientList.every(selectedIngredient =>
-        recipe.ingredients.some(recipeIngredient =>
-          recipeIngredient.ingredient.toLowerCase().includes(selectedIngredient.toLowerCase())
+      let ingredientSearch = ingredientList.every((selectedIngredient) =>
+        recipe.ingredients.some((recipeIngredient) =>
+          recipeIngredient.ingredient
+            .toLowerCase()
+            .includes(selectedIngredient.toLowerCase())
         )
       );
-      
-      // Si ingredientSearch est faux, cela signifie qu'une condition n'est pas remplie
-      if (!ingredientSearch) {
-        // Sortez ou effectuez l'action appropriée ici
-      }
-      
-      let applianceSearch = applianceList.every(selectedAppliance =>
-        recipe.appliance.toLowerCase() === selectedAppliance.toLowerCase()
+
+      let applianceSearch = applianceList.every(
+        (selectedAppliance) =>
+          recipe.appliance.toLowerCase() === selectedAppliance.toLowerCase()
       );
-      
-      // Si applianceSearch est faux, cela signifie qu'une condition n'est pas remplie
-      if (!applianceSearch) {
-        // Sortez ou effectuez l'action appropriée ici
-      }
-      
-      let ustensilSearch = ustensilList.every(selectedUstensil =>
-        recipe.ustensils.some(recipeUstensil =>
+
+      let ustensilSearch = ustensilList.every((selectedUstensil) =>
+        recipe.ustensils.some((recipeUstensil) =>
           recipeUstensil.toLowerCase().includes(selectedUstensil.toLowerCase())
         )
       );
-      
-      // Si ustensilSearch est faux, cela signifie qu'une condition n'est pas remplie
-      if (!ustensilSearch) {
-        // Sortez ou effectuez l'action appropriée ici
-      }
 
-      return isSearchMatch && ingredientSearch && applianceSearch && ustensilSearch
-    })
+      return (
+        isSearchMatch && ingredientSearch && applianceSearch && ustensilSearch
+      );
+    });
     // ----------------------------------------------
 
     this.recipeList = arrayFilterResult;

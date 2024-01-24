@@ -4,11 +4,13 @@ import { dataRecipes } from "../../data/recipes";
 import { RecipeManager } from "../models/RecipeManager";
 import { toggleButtonFilter } from "../utils/displayButtonFilter";
 import { totalRecipeUpdate } from "../utils/totalRecipeUpdate";
+import { dropdownFilter, handleFilterItemClick } from "../utils/dropdownFilter";
 import {
-  dropdownFilter,
-  handleFilterItemClick,
-} from "../utils/dropdownFilter";
-import { mainSearch, ingredientList, applianceList, ustensilList } from "../utils/filterList";
+  mainSearch,
+  ingredientList,
+  applianceList,
+  ustensilList,
+} from "../utils/filterList";
 
 // Sélectionnez les éléments DOM principaux
 const inputSearch = document.getElementById("search");
@@ -55,14 +57,14 @@ inputSearch.addEventListener("input", (event) => {
     // event.preventDefault();
     const valeurActuelle = valueInput.trim();
     if (valeurActuelle !== "") {
-      ingredientList.splice(0, ingredientList.length)
-      applianceList.splice(0, applianceList.length)
-      ustensilList.splice(0, ustensilList.length)
+      ingredientList.splice(0, ingredientList.length);
+      applianceList.splice(0, applianceList.length);
+      ustensilList.splice(0, ustensilList.length);
 
       // Filtrer les recettes en fonction du mot-clé saisi
       const recipeList = recipes.recipeFilter(valeurActuelle);
 
-      mainSearch.current = valeurActuelle
+      mainSearch.current = valeurActuelle;
 
       // Mettre à jour les recettes en fonction des filtres sélectionnés
       recipeCards = recipes.createRecipeCards();
@@ -72,10 +74,10 @@ inputSearch.addEventListener("input", (event) => {
       });
       dropdownFilter(recipeList);
       totalRecipeUpdate(recipeList);
-      document.getElementById('filterSpecificationZone').innerText = ''
+      document.getElementById("filterSpecificationZone").innerText = "";
     }
-  } else if (valueInput.length < 3){
-    let baseRecipeCards = baseRecipes.createRecipeCards()
+  } else if (valueInput.length < 3) {
+    let baseRecipeCards = baseRecipes.createRecipeCards();
     recipeCardZone.innerHTML = "";
     baseRecipeCards.forEach((recipeCard) => {
       recipeCardZone.appendChild(recipeCard);
@@ -95,7 +97,7 @@ export function handleDropdownOptionClick(event) {
   recipeCards.forEach((recipeCard) => {
     recipeCardZone.appendChild(recipeCard);
   });
-  
+
   dropdownFilter(recipeList);
   totalRecipeUpdate(recipeList);
 }
